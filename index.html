@@ -229,31 +229,46 @@ function haversineKm(a,b){
 function getFeatureIso(feature){
  const p=feature.properties||{};return p.ISO_A3||p.ISO_A3_EH||p.ADM0_A3||"";
 }
-function assignRouteToCountries(coords,geo){
- const features=geo.features||[],groups=new Map();let routeKm=0;
+function assignRouteToCountries(coords,geo,officialDistanceKm){
+ const monitoredIsoValues=new Set(Object.keys(monitoredIso));
+ const features=(geo.features||[]).filter(f=>monitoredIsoValues.has(getFeatureIso(f)));
+ const groups=new Map();let routeKm=0;
+ if(!coords||coords.length<2)throw new Error("Маршрут не містить достатньо координат.");
+ // Sample the route every ~4 km and test only monitored country polygons.
+ const samples=[coords[0]];let carry=0;
  for(let i=1;i<coords.length;i++){
-  const a=coords[i-1],b=coords[i],km=haversineKm(a,b);if(!km)continue;routeKm+=km;
+  carry+=haversineKm(coords[i-1],coords[i]);
+  if(carry>=4){samples.push(coords[i]);carry=0;}
+ }
+ const last=coords[coords.length-1],tail=samples[samples.length-1];
+ if(last[0]!==tail[0]||last[1]!==tail[1])samples.push(last);
+ for(let i=1;i<samples.length;i++){
+  const a=samples[i-1],b=samples[i],km=haversineKm(a,b);if(!km)continue;routeKm+=km;
   const mid=[(a[0]+b[0])/2,(a[1]+b[1])/2];
-  let feature=features.find(f=>pointInFeature(mid,f));
+  const feature=features.find(f=>pointInFeature(mid,f));
   const iso=feature?getFeatureIso(feature):"",code=monitoredIso[iso]||null;
-  const name=code?names[code][1]:(feature?(feature.properties.ADMIN||feature.properties.NAME||iso):"Інша / невизначена територія");
-  const key=code||("OTHER:"+name);
+  const name=code?names[code][1]:"Інші країни / поза моніторингом";
+  const key=code||"OTHER";
   if(!groups.has(key))groups.set(key,{code,name,iso,distance:0});
   groups.get(key).distance+=km;
  }
- return {segments:[...groups.values()],distance:routeKm};
+ const official=Number(officialDistanceKm)||routeKm,scale=routeKm>0?official/routeKm:1;
+ const segments=[...groups.values()].map(s=>({...s,distance:s.distance*scale}));
+ return {segments,distance:official};
 }
 async function buildAutomaticRoute(){
  const origin=document.getElementById("route-origin").value.trim(),destination=document.getElementById("route-destination").value.trim(),button=document.getElementById("buildRouteButton");
  if(!origin||!destination){setRouteStatus("Вкажіть обидва пункти маршруту.",true);return;}
  button.disabled=true;setRouteStatus("Шукаю адреси та будую автомобільний маршрут…");
  try{
-  const [from,to]=await Promise.all([geocodePlace(origin),geocodePlace(destination)]);
+  const from=await geocodePlace(origin);
+  await new Promise(resolve=>setTimeout(resolve,1100));
+  const to=await geocodePlace(destination);
   setRouteStatus("Маршрут знайдено. Визначаю країни та розраховую витрати…");
   const routeUrl="https://router.project-osrm.org/route/v1/driving/"+from.lon+","+from.lat+";"+to.lon+","+to.lat+"?overview=full&geometries=geojson&steps=false";
   const response=await fetch(routeUrl);if(!response.ok)throw new Error("Сервіс маршрутизації тимчасово недоступний.");
   const result=await response.json();if(result.code!=="Ok"||!result.routes?.length)throw new Error("Не вдалося побудувати автомобільний маршрут між цими точками.");
-  const route=result.routes[0],geo=await getRouteGeoData(),allocation=assignRouteToCountries(route.geometry.coordinates,geo);
+  const route=result.routes[0],geo=await getRouteGeoData(),allocation=assignRouteToCountries(route.geometry.coordinates,geo,route.distance/1000);
   window.lastRouteSegments=allocation.segments;window.lastRouteDistance=route.distance/1000;
   await ensureLeaflet();
   if(!routeMapInstance){routeMapInstance=L.map("routeMap",{scrollWheelZoom:false}).setView([from.lat,from.lon],6);L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",{maxZoom:18,attribution:'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'}).addTo(routeMapInstance);}
@@ -265,7 +280,7 @@ async function buildAutomaticRoute(){
   renderRouteCosts(allocation.segments,route.distance/1000);
   const km=route.distance/1000;
   setRouteStatus("Маршрут побудовано: "+from.label.split(",").slice(0,2).join(",")+" → "+to.label.split(",").slice(0,2).join(",")+" · "+formatNumber(km,1)+" км · "+formatNumber(route.duration/3600,1)+" год орієнтовного руху.");
- }catch(error){setRouteStatus(error.message||"Помилка побудови маршруту.",true);}
+ }catch(error){console.error("Route calculator error:",error);setRouteStatus(error.message||"Помилка побудови маршруту.",true);}
  finally{button.disabled=false;}
 }
 function renderRouteCosts(segments,totalRouteKm){
