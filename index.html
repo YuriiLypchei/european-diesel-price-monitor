@@ -198,7 +198,7 @@ async function geocodePlace(query){
  return {lat:Number(data[0].lat),lon:Number(data[0].lon),label:data[0].display_name};
 }
 async function getRouteGeoData(){
- if(!routeGeoPromise)routeGeoPromise=fetch("https://raw.githubusercontent.com/datasets/geo-countries/main/data/countries.geojson").then(r=>{if(!r.ok)throw new Error("GeoJSON unavailable");return r.json()});
+ if(!routeGeoPromise)routeGeoPromise=fetch("https://raw.githubusercontent.com/nvkelso/natural-earth-vector/master/geojson/ne_110m_admin_0_countries.geojson").then(r=>{if(!r.ok)throw new Error("GeoJSON unavailable");return r.json()});
  return routeGeoPromise;
 }
 function pointInRing(point,ring){
@@ -277,9 +277,17 @@ async function buildAutomaticRoute(){
   const routeUrl="https://router.project-osrm.org/route/v1/driving/"+from.lon+","+from.lat+";"+to.lon+","+to.lat+"?overview=full&geometries=geojson&steps=false";
   const response=await fetch(routeUrl);if(!response.ok)throw new Error("Сервіс маршрутизації тимчасово недоступний.");
   const result=await response.json();if(result.code!=="Ok"||!result.routes?.length)throw new Error("Не вдалося побудувати автомобільний маршрут між цими точками.");
-  const route=result.routes[0],geo=await getRouteGeoData(),allocation=assignRouteToCountries(route.geometry.coordinates,geo,route.distance/1000);
+  const route=result.routes[0];
+  let allocation;
+  try{
+   const geo=await getRouteGeoData();
+   allocation=assignRouteToCountries(route.geometry.coordinates,geo,route.distance/1000);
+  }catch(countryError){
+   console.error("Country allocation error:",countryError);
+   allocation={segments:[{code:null,name:"Інші країни / поза моніторингом",distance:route.distance/1000}],distance:route.distance/1000};
+  }
   window.lastRouteSegments=allocation.segments;window.lastRouteDistance=route.distance/1000;
-  // Render the financial calculation first; map rendering must never block the result.
+  // Render the financial calculation; map rendering must never block it.
   renderRouteCosts(allocation.segments,route.distance/1000);
   try{
    await ensureLeaflet();
