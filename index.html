@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>European Diesel Price Monitor</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0b1220;--panel:#121d30;--panel2:#17243a;--line:#26354c;--muted:#8fa1ba;--text:#edf3fb;--green:#50d6a0;--red:#ff7d7d;--blue:#76a9ff}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 15% -10%,#1c3555 0,transparent 38%),var(--bg);color:var(--text);font-family:"DM Sans",sans-serif}
+main{max-width:1240px;margin:auto;padding:34px 26px 60px}.top{display:flex;justify-content:space-between;gap:20px;align-items:center;margin-bottom:28px}.eyebrow{color:var(--green);font-size:11px;letter-spacing:2px;font-weight:700;text-transform:uppercase}.brand{font:800 27px Manrope;margin:8px 0}.sub{color:var(--muted);font-size:14px}.stamp{border:1px solid var(--line);background:#101b2d;padding:12px 16px;border-radius:12px;color:var(--muted);font-size:12px}.stamp strong{display:block;color:var(--text);font-size:14px;margin-top:4px}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:24px 0}.card,.section{background:linear-gradient(145deg,#152238,#101a2b);border:1px solid var(--line);border-radius:17px;padding:20px}.kicker{font-size:12px;color:var(--muted)}.big{font:800 30px Manrope;margin:8px 0 3px}.hint{font-size:12px;color:var(--muted)}.green{color:var(--green)}.red{color:var(--red)}
+.section{margin-top:16px}.section-head{display:flex;justify-content:space-between;align-items:center;gap:14px;margin-bottom:16px}.section h2{font:700 17px Manrope;margin:0}.pill{font-size:11px;color:#b7c9e1;background:#1b2a40;padding:7px 10px;border-radius:30px}
+table{width:100%;border-collapse:collapse}th{text-align:left;color:var(--muted);font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.7px;padding:12px 10px;border-bottom:1px solid var(--line)}td{padding:15px 10px;border-bottom:1px solid #202e43;font-size:14px}tr:last-child td{border:0}.country{font-weight:600}.flag{font-size:19px;margin-right:9px}.price{font:700 16px Manrope}.muted{color:var(--muted)}.status{font-size:11px;padding:5px 8px;border-radius:20px;background:#202e43;color:#a9bdd7}.barwrap{height:6px;background:#26364d;border-radius:8px;min-width:80px}.bar{height:6px;background:linear-gradient(90deg,#4fd6a0,#78a9ff);border-radius:8px}
+.note{color:var(--muted);font-size:12px;line-height:1.6;margin-top:14px}.notice{border-left:3px solid #e6b65c;padding:10px 13px;background:#211f1b;color:#d7c7a6;border-radius:0 9px 9px 0;font-size:12px;line-height:1.6;margin-top:14px}
+.footer{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;color:var(--muted);font-size:11px;margin-top:20px}.footer a{color:#9ebeff;text-decoration:none}
+@media(max-width:760px){main{padding:24px 14px}.top{align-items:flex-start;flex-direction:column}.brand{font-size:23px}.cards{grid-template-columns:1fr}.section{padding:15px;overflow-x:auto}table{min-width:650px}.stamp{width:100%}}
+</style></head>
+<body><main>
+<header class="top"><div><div class="eyebrow">Transport intelligence · Fuel market</div><div class="brand">European Diesel Price Monitor</div><div class="sub">Порівняння роздрібних цін на дизельне пальне · 8 країн</div></div><div class="stamp">ОСТАННЄ ОНОВЛЕННЯ<strong id="updated">Завантаження…</strong></div></header>
+<div class="cards">
+ <div class="card"><div class="kicker">Найнижча ціна · серед доступних даних</div><div class="big" id="cheapest">—</div><div class="hint" id="cheapcountry">Очікування даних</div></div>
+ <div class="card"><div class="kicker">Найвища ціна · серед доступних даних</div><div class="big" id="expensive">—</div><div class="hint" id="expensivecountry">Очікування даних</div></div>
+ <div class="card"><div class="kicker">Різниця між min та max</div><div class="big" id="spread">—</div><div class="hint">EUR за літр · без урахування України, якщо немає курсу</div></div>
+</div>
+<section class="section"><div class="section-head"><h2>Ціни за країнами</h2><span class="pill">Diesel · EUR / літр</span></div>
+<table><thead><tr><th>Країна</th><th>Середня ціна</th><th>Локальна ціна</th><th>Дата даних</th><th>Джерело / статус</th></tr></thead><tbody id="rows"><tr><td colspan="5" class="muted">Завантаження даних…</td></tr></tbody></table>
+<div class="notice">Важливо: дані ЄС надходять із Weekly Oil Bulletin Європейської комісії та зазвичай оновлюються щотижня, а не щодня. Щоденна автоматична перевірка сайту не означає, що країни щодня публікують нову ціну. Для України потрібне окреме підтверджене джерело; поки його не підключено, ціна не відображається, щоб не показувати вигадані дані.</div>
+<div class="note">Показник — середня національна роздрібна ціна дизельного пального з податками. Він не є гуртовою ціною, ціною картки паливної мережі чи ціною на конкретній АЗС.</div></section>
+<footer class="footer"><span>Дані: Європейська комісія · Weekly Oil Bulletin; агрегатор відкритих даних EU EnergyPrices</span><span><a href="https://energy.ec.europa.eu/data-and-analysis/weekly-oil-bulletin_en" target="_blank">Офіційне джерело ЄС ↗</a> · <a href="https://euenergyprices.eu/en/data" target="_blank">Дані та методологія ↗</a></span></footer>
+</main>
+<script>
+const names={UA:["🇺🇦","Україна"],SK:["🇸🇰","Словаччина"],CZ:["🇨🇿","Чехія"],AT:["🇦🇹","Австрія"],DE:["🇩🇪","Німеччина"],PL:["🇵🇱","Польща"],LT:["🇱🇹","Литва"],LV:["🇱🇻","Латвія"]};
+async function load(){try{const r=await fetch("./data.json?ts="+Date.now());if(!r.ok)throw Error("data.json не знайдено");const d=await r.json();document.getElementById("updated").textContent=d.generated_at||"—";const entries=Object.entries(names).map(([code,n])=>({code,name:n[1],flag:n[0],...(d.countries?.[code]||{})}));const valid=entries.filter(x=>Number.isFinite(x.eur_per_litre));valid.sort((a,b)=>a.eur_per_litre-b.eur_per_litre);
+document.getElementById("rows").innerHTML=entries.map(x=>`<tr><td class="country"><span class="flag">${x.flag}</span>${x.name}</td><td class="price">${Number.isFinite(x.eur_per_litre)?x.eur_per_litre.toFixed(3)+" €":"—"}</td><td>${x.local_price?x.local_price+" "+(x.currency||""):"—"}</td><td>${x.data_date||"—"}</td><td><span class="status">${x.source_label||"Немає підтверджених даних"}</span></td></tr>`).join("");
+if(valid.length){const lo=valid[0],hi=valid[valid.length-1];document.getElementById("cheapest").textContent=lo.eur_per_litre.toFixed(3)+" €";document.getElementById("cheapcountry").textContent=lo.name;document.getElementById("expensive").textContent=hi.eur_per_litre.toFixed(3)+" €";document.getElementById("expensivecountry").textContent=hi.name;document.getElementById("spread").textContent=(hi.eur_per_litre-lo.eur_per_litre).toFixed(3)+" €"}else{document.getElementById("rows").innerHTML='<tr><td colspan="5">Поки немає підтверджених даних. Перевірте джерело та оновлення.</td></tr>'}
+}catch(e){document.getElementById("updated").textContent="Немає даних";document.getElementById("rows").innerHTML='<tr><td colspan="5">Не вдалося завантажити data.json. Перевірте налаштування репозиторію.</td></tr>'}}
+load();
+</script></body></html>
