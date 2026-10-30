@@ -46,6 +46,7 @@ table{width:100%;border-collapse:collapse}th{text-align:left;color:var(--muted);
 
 .route-inputs{max-width:760px;grid-template-columns:repeat(2,minmax(0,1fr));margin-bottom:14px}
 .route-inputs input{width:100%;background:#0d1829;color:var(--text);border:1px solid var(--line);border-radius:9px;padding:11px;font:500 14px "DM Sans",sans-serif}
+.route-inputs select{width:100%;background:#0d1829;color:var(--text);border:1px solid var(--line);border-radius:9px;padding:11px;font:500 14px "DM Sans",sans-serif}
 .route-actions{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin:8px 0 14px}
 .route-button{border:0;border-radius:9px;padding:11px 16px;background:#50d6a0;color:#092117;font:700 13px "DM Sans",sans-serif;cursor:pointer}
 .route-button:disabled{opacity:.55;cursor:wait}.route-status{font-size:12px;color:var(--muted)}
@@ -79,6 +80,8 @@ table{width:100%;border-collapse:collapse}th{text-align:left;color:var(--muted);
  <div class="calc-fields route-inputs">
   <div class="calc-field"><label for="route-origin">Звідки · пункт завантаження</label><input id="route-origin" type="text" value="Bratislava, Slovakia" placeholder="Місто або адреса"></div>
   <div class="calc-field"><label for="route-destination">Куди · пункт розвантаження</label><input id="route-destination" type="text" value="Nürnberg, Germany" placeholder="Місто або адреса"></div>
+  <div class="calc-field"><label for="route-via-country">Прокласти через країну (необов'язково)</label><select id="route-via-country"><option value="">Без обмежень · найшвидший маршрут</option><option value="Hungary">Угорщина</option><option value="Poland">Польща</option><option value="Czechia">Чехія</option><option value="Austria">Австрія</option><option value="Slovakia">Словаччина</option><option value="Germany">Німеччина</option><option value="Lithuania">Литва</option><option value="Latvia">Латвія</option><option value="Ukraine">Україна</option></select></div>
+  <div class="calc-field"><label for="route-waypoints">Проміжні міста / адреси (через крапку з комою)</label><input id="route-waypoints" type="text" placeholder="Напр. Budapest; Wien"></div>
   <div class="calc-field"><label for="route-consumption">Витрата, л / 100 км</label><input id="route-consumption" type="number" min="0" step=".1" value="30"></div>
   <div class="calc-field"><label for="route-buffer">Резерв / додатковий пробіг, %</label><input id="route-buffer" type="number" min="0" step=".1" value="5"></div>
  </div>
@@ -267,16 +270,26 @@ function assignRouteToCountries(coords,geo,officialDistanceKm){
 }
 async function buildAutomaticRoute(){
  const origin=document.getElementById("route-origin").value.trim(),destination=document.getElementById("route-destination").value.trim(),button=document.getElementById("buildRouteButton");
+ const viaCountry=document.getElementById("route-via-country").value;
+ const manualStops=document.getElementById("route-waypoints").value.split(";").map(x=>x.trim()).filter(Boolean);
+ const countryStops={Hungary:"Budapest, Hungary",Poland:"Warsaw, Poland",Czechia:"Prague, Czechia",Austria:"Vienna, Austria",Slovakia:"Bratislava, Slovakia",Germany:"Munich, Germany",Lithuania:"Vilnius, Lithuania",Latvia:"Riga, Latvia",Ukraine:"Lviv, Ukraine"};
  if(!origin||!destination){setRouteStatus("Вкажіть обидва пункти маршруту.",true);return;}
  button.disabled=true;setRouteStatus("Шукаю адреси та будую автомобільний маршрут…");
  try{
-  const from=await geocodePlace(origin);
-  await new Promise(resolve=>setTimeout(resolve,1100));
-  const to=await geocodePlace(destination);
-  setRouteStatus("Маршрут знайдено. Визначаю країни та розраховую витрати…");
-  const routeUrl="https://router.project-osrm.org/route/v1/driving/"+from.lon+","+from.lat+";"+to.lon+","+to.lat+"?overview=full&geometries=geojson&steps=false";
+  const stopQueries=[...(viaCountry?[countryStops[viaCountry]]:[]),...manualStops];
+  const places=[origin,...stopQueries,destination],points=[];
+  for(let i=0;i<places.length;i++){
+   if(i>0)await new Promise(resolve=>setTimeout(resolve,1100));
+   const place=await geocodePlace(places[i]);
+   points.push(place);
+  }
+  const from=points[0],to=points[points.length-1];
+  const viaDescription=stopQueries.length?" через "+stopQueries.join(" → "):"";
+  setRouteStatus("Прокладаю маршрут"+viaDescription+"…");
+  const coordinates=points.map(p=>p.lon+","+p.lat).join(";");
+  const routeUrl="https://router.project-osrm.org/route/v1/driving/"+coordinates+"?overview=full&geometries=geojson&steps=false";
   const response=await fetch(routeUrl);if(!response.ok)throw new Error("Сервіс маршрутизації тимчасово недоступний.");
-  const result=await response.json();if(result.code!=="Ok"||!result.routes?.length)throw new Error("Не вдалося побудувати автомобільний маршрут між цими точками.");
+  const result=await response.json();if(result.code!=="Ok"||!result.routes?.length)throw new Error("Не вдалося побудувати автомобільний маршрут через вибрані точки. Перевірте адреси або оберіть інші проміжні міста.");
   const route=result.routes[0];
   let allocation;
   try{
@@ -308,7 +321,7 @@ async function buildAutomaticRoute(){
    setRouteStatus("Витрати розраховано. Карту маршруту тимчасово не вдалося відобразити.",false);
   }
   const km=route.distance/1000;
-  setRouteStatus("Маршрут побудовано: "+from.label.split(",").slice(0,2).join(",")+" → "+to.label.split(",").slice(0,2).join(",")+" · "+formatNumber(km,1)+" км · "+formatNumber(route.duration/3600,1)+" год орієнтовного руху.");
+  setRouteStatus("Маршрут побудовано"+viaDescription+": "+from.label.split(",").slice(0,2).join(",")+" → "+to.label.split(",").slice(0,2).join(",")+" · "+formatNumber(km,1)+" км · "+formatNumber(route.duration/3600,1)+" год орієнтовного руху.");
  }catch(error){console.error("Route calculator error:",error);setRouteStatus(error.message||"Помилка побудови маршруту.",true);}
  finally{button.disabled=false;}
 }
