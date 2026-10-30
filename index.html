@@ -2,7 +2,7 @@
 <html lang="uk">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>European Diesel Price Monitor</title>
+<title>Fuel & Logistics Intelligence</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
 <style>
 :root{--bg:#0b1220;--panel:#121d30;--panel2:#17243a;--line:#26354c;--muted:#8fa1ba;--text:#edf3fb;--green:#50d6a0;--red:#ff7d7d;--blue:#76a9ff}
@@ -14,10 +14,29 @@ table{width:100%;border-collapse:collapse}th{text-align:left;color:var(--muted);
 .note{color:var(--muted);font-size:12px;line-height:1.6;margin-top:14px}.notice{border-left:3px solid #e6b65c;padding:10px 13px;background:#211f1b;color:#d7c7a6;border-radius:0 9px 9px 0;font-size:12px;line-height:1.6;margin-top:14px}
 .footer{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;color:var(--muted);font-size:11px;margin-top:20px}.footer a{color:#9ebeff;text-decoration:none}
 @media(max-width:760px){main{padding:24px 14px}.top{align-items:flex-start;flex-direction:column}.brand{font-size:23px}.cards{grid-template-columns:1fr}.section{padding:15px;overflow-x:auto}table{min-width:650px}.stamp{width:100%}}
-.chart-controls{display:flex;gap:10px;flex-wrap:wrap;align-items:center}.chart-controls label{font-size:12px;color:var(--muted);display:flex;gap:8px;align-items:center}.chart-controls select{background:#0d1829;color:var(--text);border:1px solid var(--line);border-radius:9px;padding:9px 12px;font:inherit}.chart-wrap{width:100%;overflow:hidden;margin-top:14px}#historyChart{display:block;width:100%;height:auto;min-height:250px}.chart-legend{display:flex;gap:12px 18px;flex-wrap:wrap;margin-top:10px}.legend-item{display:flex;align-items:center;gap:7px;color:#c5d2e3;font-size:12px}.legend-dot{width:9px;height:9px;border-radius:50%;display:inline-block}.chart-summary{display:grid;grid-template-columns:repeat(auto-fit,minmax(145px,1fr));gap:9px;margin-top:14px}.change-item{background:#0e192a;border:1px solid var(--line);border-radius:10px;padding:11px}.change-item strong{display:block;font:700 16px Manrope;margin-top:5px}.chart-empty{color:var(--muted);padding:35px 12px;text-align:center;font-size:13px}@media(max-width:760px){.chart-controls label{flex:1;min-width:130px;align-items:flex-start;flex-direction:column}.chart-controls select{width:100%}}</style></head>
+.chart-controls{display:flex;gap:10px;flex-wrap:wrap;align-items:center}.chart-controls label{font-size:12px;color:var(--muted);display:flex;gap:8px;align-items:center}.chart-controls select{background:#0d1829;color:var(--text);border:1px solid var(--line);border-radius:9px;padding:9px 12px;font:inherit}.chart-wrap{width:100%;overflow:hidden;margin-top:14px}#historyChart{display:block;width:100%;height:auto;min-height:250px}.chart-legend{display:flex;gap:12px 18px;flex-wrap:wrap;margin-top:10px}.legend-item{display:flex;align-items:center;gap:7px;color:#c5d2e3;font-size:12px}.legend-dot{width:9px;height:9px;border-radius:50%;display:inline-block}.chart-summary{display:grid;grid-template-columns:repeat(auto-fit,minmax(145px,1fr));gap:9px;margin-top:14px}.change-item{background:#0e192a;border:1px solid var(--line);border-radius:10px;padding:11px}.change-item strong{display:block;font:700 16px Manrope;margin-top:5px}.chart-empty{color:var(--muted);padding:35px 12px;text-align:center;font-size:13px}@media(max-width:760px){.chart-controls label{flex:1;min-width:130px;align-items:flex-start;flex-direction:column}.chart-controls select{width:100%}}
+.main-nav{position:sticky;top:0;z-index:20;display:flex;gap:7px;flex-wrap:wrap;padding:10px;margin:0 0 18px;background:rgba(11,18,32,.94);backdrop-filter:blur(14px);border:1px solid var(--line);border-radius:13px}
+.main-nav a{color:#b9c9de;text-decoration:none;font-size:12px;font-weight:600;padding:9px 12px;border-radius:8px}
+.main-nav a:hover{background:#1b2a40;color:#fff}
+.brand{letter-spacing:-.7px}.section-intro{color:var(--muted);font-size:13px;line-height:1.6;margin:8px 0 0}
+.calc-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.calc-card{background:linear-gradient(145deg,#152238,#101a2b);border:1px solid var(--line);border-radius:15px;padding:18px}
+.calc-card h3{font:700 15px Manrope;margin:0 0 7px}.calc-card p{font-size:12px;color:var(--muted);line-height:1.5;margin:0 0 16px}
+.calc-fields{display:grid;grid-template-columns:1fr 1fr;gap:11px}
+.calc-field label{display:block;color:var(--muted);font-size:11px;margin-bottom:6px}
+.calc-field input{width:100%;background:#0d1829;color:var(--text);border:1px solid var(--line);border-radius:9px;padding:10px;font:600 14px "DM Sans",sans-serif}
+.calc-result{display:flex;justify-content:space-between;align-items:end;gap:10px;margin-top:16px;padding-top:14px;border-top:1px solid var(--line)}
+.calc-result span{font-size:11px;color:var(--muted)}.calc-result strong{display:block;font:800 23px Manrope;color:var(--green);margin-top:4px}
+.calc-foot{font-size:10px;color:var(--muted);line-height:1.5;margin-top:12px}
+.module-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.module-tile{border:1px solid var(--line);background:#101b2d;border-radius:12px;padding:16px}
+.module-tile strong{display:block;font:700 14px Manrope;margin-bottom:6px}.module-tile span{font-size:12px;color:var(--muted);line-height:1.5}
+@media(max-width:760px){.main-nav{position:relative}.main-nav a{font-size:11px;padding:8px}.calc-grid,.module-grid{grid-template-columns:1fr}.calc-fields{grid-template-columns:1fr 1fr}}
+</style></head>
 <body><main>
-<header class="top"><div><div class="eyebrow">Transport intelligence · Fuel market</div><div class="brand">European Diesel Price Monitor</div><div class="sub">Порівняння роздрібних цін на дизельне пальне · 8 країн</div></div><div class="stamp">ОСТАННЄ ОНОВЛЕННЯ<strong id="updated">Завантаження…</strong></div></header>
-<div class="cards">
+<header class="top"><div><div class="eyebrow">FUEL & LOGISTICS INTELLIGENCE · EUROPE</div><div class="brand">Fuel & Logistics Intelligence</div><div class="sub">Паливний ринок та інструменти для транспортного бізнесу · 8 країн</div></div><div class="stamp">ОСТАННЄ ОНОВЛЕННЯ<strong id="updated">Завантаження…</strong></div></header>
+<nav class="main-nav" aria-label="Головна навігація"><a href="#overview">Огляд ринку</a><a href="#historySection">Динаміка цін</a><a href="#calculators">Калькулятори</a><a href="#transport-costs">Транспортні витрати</a><a href="#market-reports">Звіти</a></nav>
+<div id="overview" class="cards">
  <div class="card"><div class="kicker">Найнижча ціна · серед доступних даних</div><div class="big" id="cheapest">—</div><div class="hint" id="cheapcountry">Очікування даних</div></div>
  <div class="card"><div class="kicker">Найвища ціна · серед доступних даних</div><div class="big" id="expensive">—</div><div class="hint" id="expensivecountry">Очікування даних</div></div>
  <div class="card"><div class="kicker">Різниця між min та max</div><div class="big" id="spread">—</div><div class="hint">EUR за літр · без урахування України, якщо немає курсу</div></div>
@@ -27,6 +46,51 @@ table{width:100%;border-collapse:collapse}th{text-align:left;color:var(--muted);
 <div class="notice">Важливо: дані ЄС надходять із Weekly Oil Bulletin Європейської комісії та зазвичай оновлюються щотижня, а не щодня. Щоденна автоматична перевірка сайту не означає, що країни щодня публікують нову ціну. Для України використовується окреме джерело АЗС24, а гривнева ціна перераховується в євро за офіційним курсом НБУ. Методології джерел відрізняються, тому порівняння України з країнами ЄС є орієнтовним.</div>
 <div class="note">Показник — середня національна роздрібна ціна дизельного пального з податками. Він не є гуртовою ціною, ціною картки паливної мережі чи ціною на конкретній АЗС.</div></section>
 <section class="section" id="historySection"><div class="section-head"><h2>Динаміка цін</h2><span class="pill">Історія · EUR / літр</span></div><div class="chart-controls"><label>Період<select id="periodSelect"><option value="3">Останні 3 місяці</option><option value="6">Останні 6 місяців</option><option value="12" selected>Останні 12 місяців</option></select></label><label>Країна<select id="countrySelect"><option value="ALL">Усі країни</option><option value="UA">Україна</option><option value="SK">Словаччина</option><option value="CZ">Чехія</option><option value="AT">Австрія</option><option value="DE">Німеччина</option><option value="PL">Польща</option><option value="LT">Литва</option><option value="LV">Латвія</option></select></label></div><div class="chart-wrap"><svg id="historyChart" viewBox="0 0 900 340" role="img" aria-label="Графік зміни середньої ціни дизельного пального"></svg></div><div class="chart-legend" id="chartLegend"></div><div class="chart-summary" id="chartSummary"></div><div class="note">Зміна розраховується від першого до останнього доступного значення в обраному періоді. Для України історія починає накопичуватися після підключення джерела; графік з'являтиметься в міру надходження нових даних.</div></section>
+
+<section class="section" id="calculators">
+  <div class="section-head"><div><h2>Logistics Calculators</h2><div class="section-intro">Оцініть витрати на дизель та розрахуйте орієнтовну паливну надбавку для транспортної ставки.</div></div><span class="pill">Interactive tools</span></div>
+  <div class="calc-grid">
+    <div class="calc-card">
+      <h3>Fuel Cost Calculator</h3>
+      <p>Розрахунок кількості пального та його вартості на маршруті.</p>
+      <div class="calc-fields">
+        <div class="calc-field"><label for="fc-distance">Відстань, км</label><input id="fc-distance" type="number" min="0" step="1" value="1800"></div>
+        <div class="calc-field"><label for="fc-consumption">Витрата, л / 100 км</label><input id="fc-consumption" type="number" min="0" step=".1" value="30"></div>
+        <div class="calc-field"><label for="fc-price">Ціна дизеля, €/л</label><input id="fc-price" type="number" min="0" step=".001" value="1.95"></div>
+        <div class="calc-field"><label for="fc-extra">Додатковий пробіг, %</label><input id="fc-extra" type="number" min="0" step=".1" value="0"></div>
+      </div>
+      <div class="calc-result"><div><span>Потрібно пального</span><strong id="fc-litres">540 л</strong></div><div><span>Вартість пального</span><strong id="fc-total">1 053,00 €</strong></div></div>
+      <div class="calc-foot">Розрахунок враховує задану відстань і додатковий пробіг. Не враховує AdBlue, платні дороги, простої та різні ціни заправок на маршруті.</div>
+    </div>
+    <div class="calc-card">
+      <h3>Fuel Surcharge Calculator</h3>
+      <p>Орієнтовна зміна транспортної ставки залежно від зміни ціни дизеля та частки пального в собівартості.</p>
+      <div class="calc-fields">
+        <div class="calc-field"><label for="fs-base">Базова ціна, €/л</label><input id="fs-base" type="number" min="0" step=".001" value="1.50"></div>
+        <div class="calc-field"><label for="fs-current">Поточна ціна, €/л</label><input id="fs-current" type="number" min="0" step=".001" value="1.95"></div>
+        <div class="calc-field"><label for="fs-share">Частка пального, %</label><input id="fs-share" type="number" min="0" max="100" step=".1" value="30"></div>
+        <div class="calc-field"><label for="fs-rate">Базова ставка, € (необов'язково)</label><input id="fs-rate" type="number" min="0" step=".01" placeholder="Напр. 2 000"></div>
+      </div>
+      <div class="calc-result"><div><span>Розрахункова зміна ставки</span><strong id="fs-change">+9,00%</strong></div><div><span>Сума надбавки</span><strong id="fs-amount">—</strong></div></div>
+      <div class="calc-foot">Формула: ((поточна ціна − базова ціна) / базова ціна) × частка пального. Це модельний розрахунок, а не автоматично рекомендоване підвищення тарифу. Перевіряйте базову ціну та частку пального в договорі.</div>
+    </div>
+  </div>
+</section>
+<section class="section" id="transport-costs">
+  <div class="section-head"><h2>Transport Cost Index</h2><span class="pill">Next module</span></div>
+  <div class="module-grid">
+    <div class="module-tile"><strong>Fuel component</strong><span>Вплив дизеля на собівартість перевезення — перший компонент майбутнього індексу.</span></div>
+    <div class="module-tile"><strong>Tolls & infrastructure</strong><span>Дорожні збори та платні автомагістралі за країнами.</span></div>
+    <div class="module-tile"><strong>Driver & operating costs</strong><span>Оплата праці водіїв, сервіс, ремонт та інші операційні витрати.</span></div>
+    <div class="module-tile"><strong>Leasing & equipment</strong><span>Витрати на тягачі, причепи, страхування та фінансування автопарку.</span></div>
+  </div>
+  <div class="note">Індекс буде запускатися лише після визначення прозорої методології та надійних джерел для кожної складової.</div>
+</section>
+<section class="section" id="market-reports">
+  <div class="section-head"><h2>Market Reports</h2><span class="pill">Next module</span></div>
+  <p class="section-intro">Майбутній щотижневий огляд ринку дизельного пального: зміни цін, рейтинг країн, найбільші коливання та короткі висновки для транспортного бізнесу.</p>
+</section>
+
 <footer class="footer"><span>Дані: Єврокомісія / fuel-prices.eu (CC BY 4.0); Україна — АЗС24 (CC BY 4.0), курс — НБУ</span><span><a href="https://energy.ec.europa.eu/data-and-analysis/weekly-oil-bulletin_en" target="_blank">Офіційне джерело ЄС ↗</a> · <a href="https://www.fuel-prices.eu/research/" target="_blank">Дані ЄС ↗</a> · <a href="https://azs24.com.ua/metodolohiia/" target="_blank">Методологія України ↗</a></span></footer>
 </main>
 <script>
@@ -45,6 +109,19 @@ for(const s of series){const pts=s.points.slice().sort((a,b)=>a.date.localeCompa
 svg.innerHTML=markup;legend.innerHTML=series.map(s=>'<span class="legend-item"><i class="legend-dot" style="background:'+s.color+'"></i>'+s.name+"</span>").join("");
 summary.innerHTML=series.map(s=>{const pts=s.points.slice().sort((a,b)=>a.date.localeCompare(b.date)),first=pts[0],last=pts[pts.length-1],delta=pts.length>1?(last.eur_per_litre/first.eur_per_litre-1)*100:null;return '<div class="change-item"><span class="muted">'+s.name+'</span><strong>'+last.eur_per_litre.toFixed(3)+' €</strong><span class="'+(delta===null?"muted":delta>0?"red":delta<0?"green":"muted")+'">'+(delta===null?"Поки 1 точка":(delta>0?"+":"")+delta.toFixed(1)+"% за період")+"</span></div>";}).join("");
 }
+function numberInput(id){const v=Number(document.getElementById(id).value);return Number.isFinite(v)&&v>0?v:0}
+function formatNumber(v,d=2){return v.toLocaleString("uk-UA",{minimumFractionDigits:d,maximumFractionDigits:d})}
+function updateCalculators(){
+ const distance=numberInput("fc-distance"),consumption=numberInput("fc-consumption"),price=numberInput("fc-price"),extra=numberInput("fc-extra");
+ const litres=distance*(1+extra/100)*consumption/100,total=litres*price;
+ document.getElementById("fc-litres").textContent=formatNumber(litres,1)+" л";
+ document.getElementById("fc-total").textContent=formatNumber(total,2)+" €";
+ const base=numberInput("fs-base"),current=numberInput("fs-current"),share=Math.min(100,numberInput("fs-share")),rate=numberInput("fs-rate");
+ const change=base>0?((current-base)/base)*(share/100)*100:0;
+ document.getElementById("fs-change").textContent=(change>0?"+":"")+formatNumber(change,2)+"%";
+ document.getElementById("fs-amount").textContent=rate>0?formatNumber(rate*change/100,2)+" €":"Введіть ставку";
+}
+document.querySelectorAll("#calculators input").forEach(el=>el.addEventListener("input",updateCalculators));updateCalculators();
 async function load(){try{const r=await fetch("./data.json?ts="+Date.now());if(!r.ok)throw Error("data.json не знайдено");const d=await r.json();dashboardData=d;document.getElementById("updated").textContent=d.generated_at||"—";const entries=Object.entries(names).map(([code,n])=>({code,name:n[1],flag:n[0],...(d.countries?.[code]||{})}));const valid=entries.filter(x=>Number.isFinite(x.eur_per_litre));valid.sort((a,b)=>a.eur_per_litre-b.eur_per_litre);
 document.getElementById("rows").innerHTML=entries.map(x=>`<tr><td class="country"><span class="flag">${x.flag}</span>${x.name}</td><td class="price">${Number.isFinite(x.eur_per_litre)?x.eur_per_litre.toFixed(3)+" €":"—"}</td><td>${x.local_price?x.local_price+" "+(x.currency||""):"—"}</td><td>${x.data_date||"—"}</td><td><span class="status">${x.source_label||"Немає підтверджених даних"}</span></td></tr>`).join("");
 if(valid.length){const lo=valid[0],hi=valid[valid.length-1];document.getElementById("cheapest").textContent=lo.eur_per_litre.toFixed(3)+" €";document.getElementById("cheapcountry").textContent=lo.name;document.getElementById("expensive").textContent=hi.eur_per_litre.toFixed(3)+" €";document.getElementById("expensivecountry").textContent=hi.name;document.getElementById("spread").textContent=(hi.eur_per_litre-lo.eur_per_litre).toFixed(3)+" €"}else{document.getElementById("rows").innerHTML='<tr><td colspan="5">Поки немає підтверджених даних. Перевірте джерело та оновлення.</td></tr>'}
