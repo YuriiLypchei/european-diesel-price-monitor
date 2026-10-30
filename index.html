@@ -80,7 +80,8 @@ table{width:100%;border-collapse:collapse}th{text-align:left;color:var(--muted);
  <div class="route-table-wrap"><table><thead><tr><th>Місце</th><th>Країна</th><th>Ціна, €/л</th><th>Різниця до мінімуму</th><th>Дата даних</th></tr></thead><tbody id="comparisonRows"><tr><td colspan="5" class="muted">Завантаження даних…</td></tr></tbody></table></div>
  <div class="note">Рейтинг формується за останньою доступною ціною. Перевіряйте дату кожної країни: показники ЄС зазвичай щотижневі, а український показник — окреме джерело з конвертацією за курсом НБУ.</div>
 </section>
-\n<section class="section" id="calculators">
+
+<section class="section" id="calculators">
   <div class="section-head"><div><h2>Logistics Calculators</h2><div class="section-intro">Оцініть витрати на дизель та розрахуйте орієнтовну паливну надбавку для транспортної ставки.</div></div><span class="pill">Interactive tools</span></div>
   <div class="calc-grid">
     <div class="calc-card">
@@ -194,7 +195,7 @@ async function initFuelMap(){
   if(!geo.ok)throw Error("Не вдалося завантажити географічні межі");
   const gj=await geo.json(),rows=currentCountryRows().filter(x=>Number.isFinite(x.eur_per_litre));
   const vals=rows.map(x=>x.eur_per_litre),lo=Math.min(...vals),hi=Math.max(...vals);
-  const featureLayer=L.geoJSON(gj,{filter:feature=>rows.some(x=>isoByCode[x.code]===feature.properties.ISO_A3||isoByCode[x.code]===feature.properties.ADM0_A3),style:feature=>{
+  const featureLayer=L.geoJSON(gj,{filter:feature=>rows.some(x=>isoByCode[x.code]===feature.properties.ISO_A3||isoByCode[x.code]===feature.properties.ISO_A3_EH||isoByCode[x.code]===feature.properties.ADM0_A3),style:feature=>{
    const row=rows.find(x=>isoByCode[x.code]===feature.properties.ISO_A3||isoByCode[x.code]===feature.properties.ADM0_A3);
    const ratio=hi===lo?0.5:(row.eur_per_litre-lo)/(hi-lo);
    return {color:"#d6e1ef",weight:1,fillColor:ratio<.33?"#238b68":ratio<.66?"#d1a84b":"#bd5b61",fillOpacity:.78};
@@ -206,7 +207,8 @@ async function initFuelMap(){
   setTimeout(()=>map.invalidateSize(),150);
  }catch(err){container.innerHTML='<div class="chart-empty">Карту не вдалося завантажити. Перевірте підключення до зовнішніх картографічних сервісів. Дані та калькулятори продовжують працювати.</div>';}
 }
-\nfunction numberInput(id){const v=Number(document.getElementById(id).value);return Number.isFinite(v)&&v>0?v:0}
+
+function numberInput(id){const v=Number(document.getElementById(id).value);return Number.isFinite(v)&&v>0?v:0}
 function formatNumber(v,d=2){return v.toLocaleString("uk-UA",{minimumFractionDigits:d,maximumFractionDigits:d})}
 function updateCalculators(){
  const distance=numberInput("fc-distance"),consumption=numberInput("fc-consumption"),price=numberInput("fc-price"),extra=numberInput("fc-extra");
