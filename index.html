@@ -182,12 +182,6 @@ function initRouteCalculator(){
  document.getElementById("buildRouteButton").addEventListener("click",buildAutomaticRoute);
  document.getElementById("route-consumption").addEventListener("input",()=>{if(window.lastRouteSegments)renderRouteCosts(window.lastRouteSegments,window.lastRouteDistance)});
  document.getElementById("route-buffer").addEventListener("input",()=>{if(window.lastRouteSegments)renderRouteCosts(window.lastRouteSegments,window.lastRouteDistance)});
- ensureLeaflet().then(()=>{
-  if(routeMapInstance)return;
-  routeMapInstance=L.map("routeMap",{scrollWheelZoom:false}).setView([48.2,17.2],5);
-  L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",{maxZoom:18,attribution:'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'}).addTo(routeMapInstance);
-  setTimeout(()=>routeMapInstance.invalidateSize(),200);
- }).catch(()=>setRouteStatus("Не вдалося завантажити карту. Розрахунок маршруту все одно можна виконати."));
 }
 function setRouteStatus(message,isError=false){const el=document.getElementById("routeStatus");el.textContent=message;el.style.color=isError?"#ff9999":"var(--muted)"}
 async function geocodePlace(query){
@@ -270,14 +264,26 @@ async function buildAutomaticRoute(){
   const result=await response.json();if(result.code!=="Ok"||!result.routes?.length)throw new Error("Не вдалося побудувати автомобільний маршрут між цими точками.");
   const route=result.routes[0],geo=await getRouteGeoData(),allocation=assignRouteToCountries(route.geometry.coordinates,geo,route.distance/1000);
   window.lastRouteSegments=allocation.segments;window.lastRouteDistance=route.distance/1000;
-  await ensureLeaflet();
-  if(!routeMapInstance){routeMapInstance=L.map("routeMap",{scrollWheelZoom:false}).setView([from.lat,from.lon],6);L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",{maxZoom:18,attribution:'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'}).addTo(routeMapInstance);}
-  if(routeLine)routeMapInstance.removeLayer(routeLine);
-  routeLine=L.geoJSON(route.geometry,{style:{color:"#50d6a0",weight:5,opacity:.9}}).addTo(routeMapInstance);
-  L.marker([from.lat,from.lon]).addTo(routeMapInstance).bindPopup("Завантаження: "+origin);
-  L.marker([to.lat,to.lon]).addTo(routeMapInstance).bindPopup("Розвантаження: "+destination);
-  routeMapInstance.fitBounds(routeLine.getBounds().pad(.12));setTimeout(()=>routeMapInstance.invalidateSize(),150);
+  // Render the financial calculation first; map rendering must never block the result.
   renderRouteCosts(allocation.segments,route.distance/1000);
+  try{
+   await ensureLeaflet();
+   const mapEl=document.getElementById("routeMap");
+   if(!routeMapInstance){
+    routeMapInstance=L.map(mapEl,{scrollWheelZoom:false}).setView([from.lat,from.lon],6);
+    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",{maxZoom:18,attribution:'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'}).addTo(routeMapInstance);
+   }
+   if(routeLine)routeMapInstance.removeLayer(routeLine);
+   const latLngs=route.geometry.coordinates.map(point=>[Number(point[1]),Number(point[0])]).filter(point=>Number.isFinite(point[0])&&Number.isFinite(point[1]));
+   if(latLngs.length<2)throw new Error("Маршрут не містить коректних координат для карти.");
+   routeLine=L.polyline(latLngs,{color:"#50d6a0",weight:5,opacity:.9}).addTo(routeMapInstance);
+   routeMapInstance.invalidateSize(true);
+   const bounds=routeLine.getBounds();
+   if(bounds&&bounds.isValid())routeMapInstance.fitBounds(bounds,{padding:[24,24],maxZoom:8});
+  }catch(mapError){
+   console.error("Route map display error:",mapError);
+   setRouteStatus("Витрати розраховано. Карту маршруту тимчасово не вдалося відобразити.",false);
+  }
   const km=route.distance/1000;
   setRouteStatus("Маршрут побудовано: "+from.label.split(",").slice(0,2).join(",")+" → "+to.label.split(",").slice(0,2).join(",")+" · "+formatNumber(km,1)+" км · "+formatNumber(route.duration/3600,1)+" год орієнтовного руху.");
  }catch(error){console.error("Route calculator error:",error);setRouteStatus(error.message||"Помилка побудови маршруту.",true);}
