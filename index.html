@@ -48,6 +48,10 @@ table{width:100%;border-collapse:collapse}th{text-align:left;color:var(--muted);
 .route-inputs input{width:100%;background:#0d1829;color:var(--text);border:1px solid var(--line);border-radius:9px;padding:11px;font:500 14px "DM Sans",sans-serif}
 .route-inputs select{width:100%;background:#0d1829;color:var(--text);border:1px solid var(--line);border-radius:9px;padding:11px;font:500 14px "DM Sans",sans-serif}
 .route-stops-field{grid-column:1/-1}
+.route-base-stop{display:grid;grid-template-columns:30px minmax(0,1fr);gap:8px;align-items:center}
+.route-sequence{display:grid;place-items:center;width:28px;height:28px;border-radius:50%;background:#1d3548;color:#50d6a0;font-weight:700;font-size:12px}
+.route-base-stop input{width:100%;min-width:0;background:#0d1829;color:var(--text);border:1px solid var(--line);border-radius:9px;padding:10px;font:500 14px "DM Sans",sans-serif}
+#route-via-address{width:100%;background:#0d1829;color:var(--text);border:1px solid var(--line);border-radius:9px;padding:10px;font:500 14px "DM Sans",sans-serif}
 .route-stops{display:grid;gap:8px}
 .route-stop-row{display:grid;grid-template-columns:150px minmax(0,1fr) 38px;gap:8px;align-items:center}
 .route-stop-row select,.route-stop-row input{width:100%;min-width:0;background:#0d1829;color:var(--text);border:1px solid var(--line);border-radius:9px;padding:10px;font:500 14px "DM Sans",sans-serif}
@@ -86,10 +90,9 @@ table{width:100%;border-collapse:collapse}th{text-align:left;color:var(--muted);
 <section class="section" id="routeCalculator">
  <div class="section-head"><div><h2>Route Fuel Calculator</h2><div class="section-intro">Вкажіть адресу завантаження та розвантаження. Система побудує автомобільний маршрут і розподілить кілометраж за країнами.</div></div><span class="pill">Automatic route</span></div>
  <div class="calc-fields route-inputs">
-  <div class="calc-field"><label for="route-origin">Звідки · пункт завантаження</label><input id="route-origin" type="text" value="Bratislava, Slovakia" placeholder="Місто або адреса"></div>
-  <div class="calc-field"><label for="route-destination">Куди · пункт розвантаження</label><input id="route-destination" type="text" value="Nürnberg, Germany" placeholder="Місто або адреса"></div>
-  <div class="calc-field"><label for="route-via-country">Прокласти через країну (необов'язково)</label><select id="route-via-country"><option value="">Без обмежень · найшвидший маршрут</option><option value="Hungary">Угорщина</option><option value="Poland">Польща</option><option value="Czechia">Чехія</option><option value="Austria">Австрія</option><option value="Slovakia">Словаччина</option><option value="Germany">Німеччина</option><option value="Lithuania">Литва</option><option value="Latvia">Латвія</option><option value="Ukraine">Україна</option></select></div>
-  <div class="calc-field route-stops-field"><label>Додаткові точки завантаження / розвантаження (необов'язково)</label><div id="routeStops" class="route-stops"></div><button type="button" id="addRouteStopButton" class="route-add-stop">＋ Додати точку</button><small class="route-help">Додай точки в тому порядку, в якому автомобіль має їх відвідати. Максимум 8 додаткових точок.</small></div>
+  <div class="calc-field route-stops-field"><label>1. Точки завантаження</label><div class="route-base-stop"><span class="route-sequence">1</span><input id="route-origin" type="text" value="Bratislava, Slovakia" placeholder="Перша адреса завантаження"></div><div id="routeLoadingStops" class="route-stops"></div><button type="button" id="addLoadingStopButton" class="route-add-stop">＋ Додати ще одне завантаження</button></div>
+  <div class="calc-field route-stops-field"><label>2. Проміжний пункт маршруту (необов'язково)</label><select id="route-via-country"><option value="">Без обмежень · найшвидший маршрут</option><option value="Hungary">Через Угорщину</option><option value="Poland">Через Польщу</option><option value="Czechia">Через Чехію</option><option value="Austria">Через Австрію</option><option value="Slovakia">Через Словаччину</option><option value="Germany">Через Німеччину</option><option value="Lithuania">Через Литву</option><option value="Latvia">Через Латвію</option><option value="Ukraine">Через Україну</option></select><input id="route-via-address" type="text" placeholder="Або конкретне місто / адреса, напр. Budapest" style="margin-top:8px"></div>
+  <div class="calc-field route-stops-field"><label>3. Точки розвантаження</label><div class="route-base-stop"><span class="route-sequence">1</span><input id="route-destination" type="text" value="Nürnberg, Germany" placeholder="Перша адреса розвантаження"></div><div id="routeUnloadingStops" class="route-stops"></div><button type="button" id="addUnloadingStopButton" class="route-add-stop">＋ Додати ще одне розвантаження</button><small class="route-help">Точки відвідуються послідовно: усі завантаження → проміжний пункт → усі розвантаження. До 8 додаткових адрес у кожному блоці.</small></div>
   <div class="calc-field"><label for="route-consumption">Витрата, л / 100 км</label><input id="route-consumption" type="number" min="0" step=".1" value="30"></div>
   <div class="calc-field"><label for="route-buffer">Резерв / додатковий пробіг, %</label><input id="route-buffer" type="number" min="0" step=".1" value="5"></div>
  </div>
@@ -197,20 +200,19 @@ function ensureLeaflet(){
 }
 function initRouteCalculator(){
  document.getElementById("buildRouteButton").addEventListener("click",buildAutomaticRoute);
- document.getElementById("addRouteStopButton").addEventListener("click",()=>addRouteStop());
+ document.getElementById("addLoadingStopButton").addEventListener("click",()=>addRouteStop("loading"));
+ document.getElementById("addUnloadingStopButton").addEventListener("click",()=>addRouteStop("unloading"));
  document.getElementById("route-consumption").addEventListener("input",()=>{if(window.lastRouteSegments)renderRouteCosts(window.lastRouteSegments,window.lastRouteDistance)});
  document.getElementById("route-buffer").addEventListener("input",()=>{if(window.lastRouteSegments)renderRouteCosts(window.lastRouteSegments,window.lastRouteDistance)});
 }
-function addRouteStop(type="loading",value=""){
- const container=document.getElementById("routeStops");
- if(container.children.length>=8){setRouteStatus("Можна додати максимум 8 додаткових точок.",true);return;}
+function addRouteStop(type){
+ const container=document.getElementById(type==="loading"?"routeLoadingStops":"routeUnloadingStops");
+ if(container.children.length>=8){setRouteStatus("Можна додати максимум 8 додаткових точок у кожному блоці.",true);return;}
  const row=document.createElement("div");row.className="route-stop-row";
- const select=document.createElement("select");select.className="route-stop-type";select.setAttribute("aria-label","Тип точки");
- [["loading","Завантаження"],["unloading","Розвантаження"]].forEach(([v,label])=>{const option=document.createElement("option");option.value=v;option.textContent=label;select.appendChild(option);});
- select.value=type;
- const input=document.createElement("input");input.type="text";input.className="route-stop-address";input.placeholder="Місто або повна адреса";input.value=value;input.setAttribute("aria-label","Адреса додаткової точки");
- const remove=document.createElement("button");remove.type="button";remove.className="route-stop-remove";remove.textContent="×";remove.title="Видалити точку";remove.addEventListener("click",()=>row.remove());
- row.append(select,input,remove);container.appendChild(row);
+ const number=document.createElement("span");number.className="route-sequence";number.textContent=String(container.children.length+2);
+ const input=document.createElement("input");input.type="text";input.className="route-stop-address";input.placeholder=type==="loading"?"Наступна адреса завантаження":"Наступна адреса розвантаження";input.setAttribute("aria-label",input.placeholder);
+ const remove=document.createElement("button");remove.type="button";remove.className="route-stop-remove";remove.textContent="×";remove.title="Видалити точку";remove.addEventListener("click",()=>{row.remove();[...container.children].forEach((item,index)=>{item.querySelector(".route-sequence").textContent=String(index+2);});});
+ row.append(number,input,remove);container.appendChild(row);
 }
 function setRouteStatus(message,isError=false){const el=document.getElementById("routeStatus");el.textContent=message;el.style.color=isError?"#ff9999":"var(--muted)"}
 async function geocodePlace(query){
@@ -290,30 +292,35 @@ function assignRouteToCountries(coords,geo,officialDistanceKm){
 }
 async function buildAutomaticRoute(){
  const origin=document.getElementById("route-origin").value.trim(),destination=document.getElementById("route-destination").value.trim(),button=document.getElementById("buildRouteButton");
- const viaCountry=document.getElementById("route-via-country").value;
- const extraStops=[...document.querySelectorAll("#routeStops .route-stop-row")].map(row=>({type:row.querySelector(".route-stop-type").value,address:row.querySelector(".route-stop-address").value.trim()})).filter(stop=>stop.address);
- const emptyStops=[...document.querySelectorAll("#routeStops .route-stop-row")].filter(row=>!row.querySelector(".route-stop-address").value.trim());
+ const viaCountry=document.getElementById("route-via-country").value,viaAddress=document.getElementById("route-via-address").value.trim();
+ const loadingStops=[...document.querySelectorAll("#routeLoadingStops .route-stop-address")].map(el=>el.value.trim());
+ const unloadingStops=[...document.querySelectorAll("#routeUnloadingStops .route-stop-address")].map(el=>el.value.trim());
  const countryStops={Hungary:"Budapest, Hungary",Poland:"Warsaw, Poland",Czechia:"Prague, Czechia",Austria:"Vienna, Austria",Slovakia:"Bratislava, Slovakia",Germany:"Munich, Germany",Lithuania:"Vilnius, Lithuania",Latvia:"Riga, Latvia",Ukraine:"Lviv, Ukraine"};
- if(!origin||!destination){setRouteStatus("Вкажіть обидва пункти маршруту.",true);return;}
- button.disabled=true;setRouteStatus("Шукаю адреси та будую автомобільний маршрут…");
+ if(!origin||!destination){setRouteStatus("Вкажіть першу точку завантаження та першу точку розвантаження.",true);return;}
+ if(loadingStops.some(x=>!x)||unloadingStops.some(x=>!x)){setRouteStatus("Заповніть усі додані адреси або видаліть порожні рядки.",true);return;}
+ button.disabled=true;setRouteStatus("Послідовно шукаю всі адреси маршруту…");
  try{
-  if(emptyStops.length)throw new Error("Заповніть адресу кожної доданої точки або видаліть порожній рядок.");
-  const stopQueries=[...(viaCountry?[{address:countryStops[viaCountry],type:"via"}]:[]),...extraStops];
-  const places=[{address:origin,type:"origin"},...stopQueries,{address:destination,type:"destination"}],points=[];
-  for(let i=0;i<places.length;i++){
+  const orderedStops=[
+   {address:origin,type:"loading"},
+   ...loadingStops.map(address=>({address,type:"loading"})),
+   ...(viaCountry?[{address:countryStops[viaCountry],type:"via"}]:[]),
+   ...(viaAddress?[{address:viaAddress,type:"via"}]:[]),
+   {address:destination,type:"unloading"},
+   ...unloadingStops.map(address=>({address,type:"unloading"}))
+  ];
+  const points=[];
+  for(let i=0;i<orderedStops.length;i++){
    if(i>0)await new Promise(resolve=>setTimeout(resolve,1100));
-   const place=await geocodePlace(places[i].address);
-   points.push(place);
+   setRouteStatus("Знаходжу точку "+(i+1)+" із "+orderedStops.length+": "+orderedStops[i].address);
+   points.push(await geocodePlace(orderedStops[i].address));
   }
   const from=points[0],to=points[points.length-1];
-  const viaDescription=stopQueries.length?" через "+stopQueries.map(stop=>stop.address).join(" → "):"";
-  const loadingCount=extraStops.filter(stop=>stop.type==="loading").length;
-  const unloadingCount=extraStops.filter(stop=>stop.type==="unloading").length;
-  setRouteStatus("Прокладаю маршрут із додатковими точками"+viaDescription+"…");
+  const routeSequence=orderedStops.map((stop,i)=>(i+1)+". "+(stop.type==="loading"?"Завантаження":stop.type==="unloading"?"Розвантаження":"Проміжний пункт")+" — "+stop.address).join(" → ");
+  setRouteStatus("Прокладаю маршрут у заданій послідовності…");
   const coordinates=points.map(p=>p.lon+","+p.lat).join(";");
   const routeUrl="https://router.project-osrm.org/route/v1/driving/"+coordinates+"?overview=full&geometries=geojson&steps=false";
   const response=await fetch(routeUrl);if(!response.ok)throw new Error("Сервіс маршрутизації тимчасово недоступний.");
-  const result=await response.json();if(result.code!=="Ok"||!result.routes?.length)throw new Error("Не вдалося побудувати автомобільний маршрут через вибрані точки. Перевірте адреси або оберіть інші проміжні міста.");
+  const result=await response.json();if(result.code!=="Ok"||!result.routes?.length)throw new Error("Не вдалося побудувати маршрут через усі задані точки. Перевірте адреси та їхню послідовність.");
   const route=result.routes[0];
   let allocation;
   try{
@@ -324,13 +331,11 @@ async function buildAutomaticRoute(){
    allocation={segments:[{code:null,name:"Інші країни / поза моніторингом",distance:route.distance/1000}],distance:route.distance/1000};
   }
   window.lastRouteSegments=allocation.segments;window.lastRouteDistance=route.distance/1000;
-  // Render the financial calculation; map rendering must never block it.
   renderRouteCosts(allocation.segments,route.distance/1000);
   try{
    await ensureLeaflet();
-   const mapEl=document.getElementById("routeMap");
    if(!routeMapInstance){
-    routeMapInstance=L.map(mapEl,{scrollWheelZoom:false}).setView([from.lat,from.lon],6);
+    routeMapInstance=L.map(document.getElementById("routeMap"),{scrollWheelZoom:false}).setView([from.lat,from.lon],6);
     L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",{maxZoom:18,attribution:'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'}).addTo(routeMapInstance);
    }
    if(routeLine)routeMapInstance.removeLayer(routeLine);
@@ -338,14 +343,10 @@ async function buildAutomaticRoute(){
    if(latLngs.length<2)throw new Error("Маршрут не містить коректних координат для карти.");
    routeLine=L.polyline(latLngs,{color:"#50d6a0",weight:5,opacity:.9}).addTo(routeMapInstance);
    routeMapInstance.invalidateSize(true);
-   const bounds=routeLine.getBounds();
-   if(bounds&&bounds.isValid())routeMapInstance.fitBounds(bounds,{padding:[24,24],maxZoom:8});
-  }catch(mapError){
-   console.error("Route map display error:",mapError);
-   setRouteStatus("Витрати розраховано. Карту маршруту тимчасово не вдалося відобразити.",false);
-  }
+   const bounds=routeLine.getBounds();if(bounds&&bounds.isValid())routeMapInstance.fitBounds(bounds,{padding:[24,24],maxZoom:8});
+  }catch(mapError){console.error("Route map display error:",mapError);setRouteStatus("Витрати розраховано. Карту маршруту тимчасово не вдалося відобразити.",false);}
   const km=route.distance/1000;
-  setRouteStatus("Маршрут побудовано"+viaDescription+": "+from.label.split(",").slice(0,2).join(",")+" → "+to.label.split(",").slice(0,2).join(",")+" · "+formatNumber(km,1)+" км · "+formatNumber(route.duration/3600,1)+" год · додатково: "+loadingCount+" завантажень, "+unloadingCount+" розвантажень.");
+  setRouteStatus("Маршрут побудовано · "+formatNumber(km,1)+" км · "+formatNumber(route.duration/3600,1)+" год · "+loadingStops.length+" додаткових завантажень · "+unloadingStops.length+" додаткових розвантажень. Послідовність: "+routeSequence);
  }catch(error){console.error("Route calculator error:",error);setRouteStatus(error.message||"Помилка побудови маршруту.",true);}
  finally{button.disabled=false;}
 }
