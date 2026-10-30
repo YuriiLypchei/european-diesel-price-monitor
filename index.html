@@ -198,7 +198,7 @@ async function geocodePlace(query){
  return {lat:Number(data[0].lat),lon:Number(data[0].lon),label:data[0].display_name};
 }
 async function getRouteGeoData(){
- if(!routeGeoPromise)routeGeoPromise=fetch("https://datahub.io/core/geo-countries/_r/-/data/countries.geojson").then(r=>{if(!r.ok)throw new Error("GeoJSON unavailable");return r.json()});
+ if(!routeGeoPromise)routeGeoPromise=fetch("https://raw.githubusercontent.com/datasets/geo-countries/main/data/countries.geojson").then(r=>{if(!r.ok)throw new Error("GeoJSON unavailable");return r.json()});
  return routeGeoPromise;
 }
 function pointInRing(point,ring){
