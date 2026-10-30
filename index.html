@@ -198,7 +198,7 @@ async function geocodePlace(query){
  return {lat:Number(data[0].lat),lon:Number(data[0].lon),label:data[0].display_name};
 }
 async function getRouteGeoData(){
- if(!routeGeoPromise)routeGeoPromise=fetch("https://raw.githubusercontent.com/datasets/geo-countries/master/data/countries.geojson").then(r=>{if(!r.ok)throw new Error("GeoJSON unavailable");return r.json()});
+ if(!routeGeoPromise)routeGeoPromise=fetch("https://datahub.io/core/geo-countries/_r/-/data/countries.geojson").then(r=>{if(!r.ok)throw new Error("GeoJSON unavailable");return r.json()});
  return routeGeoPromise;
 }
 function pointInRing(point,ring){
@@ -228,12 +228,13 @@ function haversineKm(a,b){
 }
 function getFeatureIso(feature){
  const p=feature.properties||{},valid=new Set(Object.keys(monitoredIso));
- // Some GeoJSON records use the placeholder "-99" in ISO_A3 while a valid
- // country code is available in ISO_A3_EH / ADM0_A3. Check every candidate.
- const candidates=[p.ISO_A3_EH,p.ADM0_A3,p.ISO_A3,p.SOV_A3,p.GU_A3,p.WB_A3];
+ // Support both the legacy Natural Earth fields and the current geo-countries schema.
+ const candidates=[
+  p["ISO3166-1-Alpha-3"],p.ISO_A3_EH,p.ADM0_A3,p.ISO_A3,p.SOV_A3,p.GU_A3,p.WB_A3
+ ];
  const match=candidates.find(value=>value&&valid.has(String(value).trim().toUpperCase()));
  if(match)return String(match).trim().toUpperCase();
- const label=String(p.ADMIN||p.name||p.NAME_EN||p.NAME||"").trim().toLowerCase();
+ const label=String(p.name||p.ADMIN||p.NAME_EN||p.NAME||"").trim().toLowerCase();
  const byName={"ukraine":"UKR","slovakia":"SVK","czechia":"CZE","czech republic":"CZE","austria":"AUT","germany":"DEU","poland":"POL","lithuania":"LTU","latvia":"LVA"};
  return byName[label]||"";
 }
