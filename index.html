@@ -43,6 +43,15 @@ table{width:100%;border-collapse:collapse}th{text-align:left;color:var(--muted);
 .rank-bar{height:7px;border-radius:8px;background:#26364d;overflow:hidden;min-width:70px}.rank-bar i{display:block;height:100%;background:linear-gradient(90deg,#50d6a0,#76a9ff);border-radius:8px}
 .map-note{margin-top:10px;font-size:11px;color:var(--muted);line-height:1.5}
 @media(max-width:760px){#fuelPriceMap{height:360px}.route-results{grid-template-columns:1fr}.route-result strong{font-size:18px}}
+
+.route-inputs{max-width:760px;grid-template-columns:repeat(2,minmax(0,1fr));margin-bottom:14px}
+.route-inputs input{width:100%;background:#0d1829;color:var(--text);border:1px solid var(--line);border-radius:9px;padding:11px;font:500 14px "DM Sans",sans-serif}
+.route-actions{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin:8px 0 14px}
+.route-button{border:0;border-radius:9px;padding:11px 16px;background:#50d6a0;color:#092117;font:700 13px "DM Sans",sans-serif;cursor:pointer}
+.route-button:disabled{opacity:.55;cursor:wait}.route-status{font-size:12px;color:var(--muted)}
+.route-map{height:360px;width:100%;border:1px solid var(--line);border-radius:12px;overflow:hidden;background:#101b2d;margin-bottom:14px}
+.route-table{min-width:600px}.route-table td{font-size:12px}
+@media(max-width:760px){.route-inputs{grid-template-columns:1fr}.route-map{height:300px}.route-actions{align-items:flex-start;flex-direction:column}.route-button{width:100%}}
 </style></head>
 <body><main>
 <header class="top"><div><div class="eyebrow">FUEL & LOGISTICS INTELLIGENCE · EUROPE</div><div class="brand">Fuel & Logistics Intelligence</div><div class="sub">Паливний ринок та інструменти для транспортного бізнесу · 8 країн</div></div><div class="stamp">ОСТАННЄ ОНОВЛЕННЯ<strong id="updated">Завантаження…</strong></div></header>
@@ -66,14 +75,19 @@ table{width:100%;border-collapse:collapse}th{text-align:left;color:var(--muted);
  <div class="map-note">Карта використовує зовнішні картографічні дані OpenStreetMap та межі країн GeoJSON. Ціни відображають національні середні значення з різною періодичністю оновлення залежно від джерела.</div>
 </section>
 <section class="section" id="routeCalculator">
- <div class="section-head"><div><h2>Route Fuel Calculator</h2><div class="section-intro">Розподіліть кілометраж маршруту між країнами. Калькулятор оцінить заправку за середньою ціною дизеля кожної країни.</div></div><span class="pill">Route planning</span></div>
- <div class="calc-fields" style="max-width:420px;margin-bottom:15px">
+ <div class="section-head"><div><h2>Route Fuel Calculator</h2><div class="section-intro">Вкажіть адресу завантаження та розвантаження. Система побудує автомобільний маршрут і розподілить кілометраж за країнами.</div></div><span class="pill">Automatic route</span></div>
+ <div class="calc-fields route-inputs">
+  <div class="calc-field"><label for="route-origin">Звідки · пункт завантаження</label><input id="route-origin" type="text" value="Bratislava, Slovakia" placeholder="Місто або адреса"></div>
+  <div class="calc-field"><label for="route-destination">Куди · пункт розвантаження</label><input id="route-destination" type="text" value="Nürnberg, Germany" placeholder="Місто або адреса"></div>
   <div class="calc-field"><label for="route-consumption">Витрата, л / 100 км</label><input id="route-consumption" type="number" min="0" step=".1" value="30"></div>
   <div class="calc-field"><label for="route-buffer">Резерв / додатковий пробіг, %</label><input id="route-buffer" type="number" min="0" step=".1" value="5"></div>
  </div>
- <div class="route-table-wrap"><table class="route-table"><thead><tr><th>Країна</th><th>Відстань у країні, км</th><th>Орієнтовна ціна, €/л</th><th>Пальне, л</th><th>Вартість, €</th></tr></thead><tbody id="routeRows"></tbody></table></div>
- <div class="route-results"><div class="route-result"><span>Загальна відстань</span><strong id="routeDistance">0 км</strong></div><div class="route-result"><span>Потрібно пального</span><strong id="routeLitres">0 л</strong></div><div class="route-result"><span>Орієнтовна вартість</span><strong id="routeCost">0,00 €</strong></div></div>
- <div id="routeBreakdown" class="note">Вкажіть кілометраж для країн маршруту. Розрахунок використовує національні середні ціни, а не фактичні ціни конкретних АЗС.</div>
+ <div class="route-actions"><button type="button" id="buildRouteButton" class="route-button">Побудувати маршрут і розрахувати</button><span id="routeStatus" class="route-status">Вкажіть початкову та кінцеву точки.</span></div>
+ <div id="routeMap" class="route-map" aria-label="Карта розрахованого маршруту"></div>
+ <div class="route-results"><div class="route-result"><span>Загальна відстань</span><strong id="routeDistance">—</strong></div><div class="route-result"><span>Потрібно пального</span><strong id="routeLitres">—</strong></div><div class="route-result"><span>Вартість за країнами з даними</span><strong id="routeCost">—</strong></div></div>
+ <div class="route-table-wrap"><table class="route-table"><thead><tr><th>Країна</th><th>Відстань, км</th><th>Ціна дизеля, €/л</th><th>Пальне, л</th><th>Вартість, €</th></tr></thead><tbody id="routeRows"><tr><td colspan="5" class="muted">Побудуйте маршрут, щоб побачити розподіл за країнами.</td></tr></tbody></table></div>
+ <div id="routeBreakdown" class="note">Розрахунок використовує національні середні ціни. Це оцінка витрат, а не рекомендація конкретних АЗС чи план заправок.</div>
+ <div class="map-note">Маршрут: OSRM. Пошук адрес: OpenStreetMap Nominatim. Карта: OpenStreetMap. Дотримуйтеся правил використання цих відкритих сервісів. Для країн поза моніторингом кілометраж враховується, але вартість не оцінюється через відсутність цінових даних.</div>
 </section>
 <section class="section" id="countryComparison">
  <div class="section-head"><div><h2>Country Comparison</h2><div class="section-intro">Рейтинг країн за ціною дизеля, різниця з найдешевшим ринком та дата останніх доступних даних.</div></div><span class="pill">Live comparison</span></div>
@@ -153,35 +167,120 @@ function renderComparison(){
  const min=rows.length?rows[0].eur_per_litre:0;
  document.getElementById("comparisonRows").innerHTML=rows.map((x,i)=>'<tr><td>'+(i+1)+'</td><td class="country"><span class="flag">'+x.flag+'</span>'+x.name+'</td><td class="price">'+x.eur_per_litre.toFixed(3)+' €</td><td>'+(x.eur_per_litre-min>0?'+'+(x.eur_per_litre-min).toFixed(3)+' €':'—')+'</td><td>'+((x.data_date)||'—')+'</td></tr>').join("")||'<tr><td colspan="5">Немає доступних даних</td></tr>';
 }
-function initRouteCalculator(){
- const body=document.getElementById("routeRows");
- const opts=currentCountryRows().map(x=>'<option value="'+x.code+'">'+x.flag+' '+x.name+'</option>').join("");
- const defaults=[["SK",300],["AT",500],["DE",900],["CZ",0],["PL",0]];
- body.innerHTML=defaults.map((v,i)=>'<tr><td><select class="route-country" aria-label="Країна ділянки '+(i+1)+'">'+opts+'</select></td><td><input class="route-km" type="number" min="0" step="1" value="'+v[1]+'" aria-label="Кілометри ділянки '+(i+1)+'"></td><td class="route-price muted">—</td><td class="route-litres">0,0</td><td class="route-cost">0,00 €</td></tr>').join("");
- body.querySelectorAll(".route-country").forEach((el,i)=>{el.value=defaults[i][0];el.addEventListener("change",calculateRoute)});
- body.querySelectorAll(".route-km").forEach(el=>el.addEventListener("input",calculateRoute));
- document.getElementById("route-consumption").addEventListener("input",calculateRoute);
- document.getElementById("route-buffer").addEventListener("input",calculateRoute);
- calculateRoute();
-}
-function calculateRoute(){
- if(!dashboardData)return;
- const consumption=Math.max(0,Number(document.getElementById("route-consumption").value)||0);
- const buffer=Math.max(0,Number(document.getElementById("route-buffer").value)||0);
- const trs=[...document.querySelectorAll("#routeRows tr")];let totalKm=0,totalLitres=0,totalCost=0,parts=[];
- trs.forEach(tr=>{
-  const code=tr.querySelector(".route-country").value,km=Math.max(0,Number(tr.querySelector(".route-km").value)||0),country=dashboardData.countries?.[code]||{},price=Number(country.eur_per_litre);
-  const litres=km*(1+buffer/100)*consumption/100,cost=Number.isFinite(price)?litres*price:0;
-  totalKm+=km;totalLitres+=litres;if(Number.isFinite(price))totalCost+=cost;
-  tr.querySelector(".route-price").textContent=Number.isFinite(price)?price.toFixed(3)+" €":"Немає даних";
-  tr.querySelector(".route-litres").textContent=formatNumber(litres,1);
-  tr.querySelector(".route-cost").textContent=Number.isFinite(price)?formatNumber(cost,2)+" €":"—";
-  if(km>0)parts.push(names[code][1]+": "+formatNumber(cost,2)+" €");
+
+let routeMapInstance=null,routeLine=null,routeGeoPromise=null;
+const monitoredIso={UKR:"UA",SVK:"SK",CZE:"CZ",AUT:"AT",DEU:"DE",POL:"PL",LTU:"LT",LVA:"LV"};
+function ensureLeaflet(){
+ if(window.L)return Promise.resolve();
+ return new Promise((resolve,reject)=>{
+  const existing=document.querySelector('script[data-leaflet="1"]');
+  if(existing){existing.addEventListener("load",resolve,{once:true});existing.addEventListener("error",reject,{once:true});return;}
+  const script=document.createElement("script");script.src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js";script.dataset.leaflet="1";script.onload=resolve;script.onerror=reject;document.head.appendChild(script);
  });
- document.getElementById("routeDistance").textContent=formatNumber(totalKm,0)+" км";
- document.getElementById("routeLitres").textContent=formatNumber(totalLitres,1)+" л";
- document.getElementById("routeCost").textContent=formatNumber(totalCost,2)+" €";
- document.getElementById("routeBreakdown").textContent=parts.length?"Вартість за ділянками: "+parts.join(" · ")+". Ціни — національні середні, тому результат є орієнтовним.": "Вкажіть кілометраж для країн маршруту.";
+}
+function initRouteCalculator(){
+ document.getElementById("buildRouteButton").addEventListener("click",buildAutomaticRoute);
+ document.getElementById("route-consumption").addEventListener("input",()=>{if(window.lastRouteSegments)renderRouteCosts(window.lastRouteSegments,window.lastRouteDistance)});
+ document.getElementById("route-buffer").addEventListener("input",()=>{if(window.lastRouteSegments)renderRouteCosts(window.lastRouteSegments,window.lastRouteDistance)});
+ ensureLeaflet().then(()=>{
+  if(routeMapInstance)return;
+  routeMapInstance=L.map("routeMap",{scrollWheelZoom:false}).setView([48.2,17.2],5);
+  L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",{maxZoom:18,attribution:'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'}).addTo(routeMapInstance);
+  setTimeout(()=>routeMapInstance.invalidateSize(),200);
+ }).catch(()=>setRouteStatus("Не вдалося завантажити карту. Розрахунок маршруту все одно можна виконати."));
+}
+function setRouteStatus(message,isError=false){const el=document.getElementById("routeStatus");el.textContent=message;el.style.color=isError?"#ff9999":"var(--muted)"}
+async function geocodePlace(query){
+ const url="https://nominatim.openstreetmap.org/search?format=jsonv2&limit=1&q="+encodeURIComponent(query);
+ const response=await fetch(url,{headers:{Accept:"application/json"}});
+ if(!response.ok)throw new Error("Сервіс пошуку адрес тимчасово недоступний.");
+ const data=await response.json();if(!data.length)throw new Error("Не знайдено адресу: "+query);
+ return {lat:Number(data[0].lat),lon:Number(data[0].lon),label:data[0].display_name};
+}
+async function getRouteGeoData(){
+ if(!routeGeoPromise)routeGeoPromise=fetch("https://raw.githubusercontent.com/datasets/geo-countries/master/data/countries.geojson").then(r=>{if(!r.ok)throw new Error("GeoJSON unavailable");return r.json()});
+ return routeGeoPromise;
+}
+function pointInRing(point,ring){
+ const x=point[0],y=point[1];let inside=false;
+ for(let i=0,j=ring.length-1;i<ring.length;j=i++){
+  const xi=ring[i][0],yi=ring[i][1],xj=ring[j][0],yj=ring[j][1];
+  const intersect=((yi>y)!==(yj>y))&&(x<(xj-xi)*(y-yi)/(yj-yi+Number.EPSILON)+xi);
+  if(intersect)inside=!inside;
+ }
+ return inside;
+}
+function pointInPolygonCoords(point,coords){
+ if(!pointInRing(point,coords[0]))return false;
+ for(let i=1;i<coords.length;i++)if(pointInRing(point,coords[i]))return false;
+ return true;
+}
+function pointInFeature(point,feature){
+ const g=feature.geometry;if(!g)return false;
+ if(g.type==="Polygon")return pointInPolygonCoords(point,g.coordinates);
+ if(g.type==="MultiPolygon")return g.coordinates.some(poly=>pointInPolygonCoords(point,poly));
+ return false;
+}
+function haversineKm(a,b){
+ const rad=v=>v*Math.PI/180,R=6371,dLat=rad(b[1]-a[1]),dLon=rad(b[0]-a[0]);
+ const q=Math.sin(dLat/2)**2+Math.cos(rad(a[1]))*Math.cos(rad(b[1]))*Math.sin(dLon/2)**2;
+ return 2*R*Math.atan2(Math.sqrt(q),Math.sqrt(1-q));
+}
+function getFeatureIso(feature){
+ const p=feature.properties||{};return p.ISO_A3||p.ISO_A3_EH||p.ADM0_A3||"";
+}
+function assignRouteToCountries(coords,geo){
+ const features=geo.features||[],groups=new Map();let routeKm=0;
+ for(let i=1;i<coords.length;i++){
+  const a=coords[i-1],b=coords[i],km=haversineKm(a,b);if(!km)continue;routeKm+=km;
+  const mid=[(a[0]+b[0])/2,(a[1]+b[1])/2];
+  let feature=features.find(f=>pointInFeature(mid,f));
+  const iso=feature?getFeatureIso(feature):"",code=monitoredIso[iso]||null;
+  const name=code?names[code][1]:(feature?(feature.properties.ADMIN||feature.properties.NAME||iso):"Інша / невизначена територія");
+  const key=code||("OTHER:"+name);
+  if(!groups.has(key))groups.set(key,{code,name,iso,distance:0});
+  groups.get(key).distance+=km;
+ }
+ return {segments:[...groups.values()],distance:routeKm};
+}
+async function buildAutomaticRoute(){
+ const origin=document.getElementById("route-origin").value.trim(),destination=document.getElementById("route-destination").value.trim(),button=document.getElementById("buildRouteButton");
+ if(!origin||!destination){setRouteStatus("Вкажіть обидва пункти маршруту.",true);return;}
+ button.disabled=true;setRouteStatus("Шукаю адреси та будую автомобільний маршрут…");
+ try{
+  const [from,to]=await Promise.all([geocodePlace(origin),geocodePlace(destination)]);
+  setRouteStatus("Маршрут знайдено. Визначаю країни та розраховую витрати…");
+  const routeUrl="https://router.project-osrm.org/route/v1/driving/"+from.lon+","+from.lat+";"+to.lon+","+to.lat+"?overview=full&geometries=geojson&steps=false";
+  const response=await fetch(routeUrl);if(!response.ok)throw new Error("Сервіс маршрутизації тимчасово недоступний.");
+  const result=await response.json();if(result.code!=="Ok"||!result.routes?.length)throw new Error("Не вдалося побудувати автомобільний маршрут між цими точками.");
+  const route=result.routes[0],geo=await getRouteGeoData(),allocation=assignRouteToCountries(route.geometry.coordinates,geo);
+  window.lastRouteSegments=allocation.segments;window.lastRouteDistance=route.distance/1000;
+  await ensureLeaflet();
+  if(!routeMapInstance){routeMapInstance=L.map("routeMap",{scrollWheelZoom:false}).setView([from.lat,from.lon],6);L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",{maxZoom:18,attribution:'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'}).addTo(routeMapInstance);}
+  if(routeLine)routeMapInstance.removeLayer(routeLine);
+  routeLine=L.geoJSON(route.geometry,{style:{color:"#50d6a0",weight:5,opacity:.9}}).addTo(routeMapInstance);
+  L.marker([from.lat,from.lon]).addTo(routeMapInstance).bindPopup("Завантаження: "+origin);
+  L.marker([to.lat,to.lon]).addTo(routeMapInstance).bindPopup("Розвантаження: "+destination);
+  routeMapInstance.fitBounds(routeLine.getBounds().pad(.12));setTimeout(()=>routeMapInstance.invalidateSize(),150);
+  renderRouteCosts(allocation.segments,route.distance/1000);
+  const km=route.distance/1000;
+  setRouteStatus("Маршрут побудовано: "+from.label.split(",").slice(0,2).join(",")+" → "+to.label.split(",").slice(0,2).join(",")+" · "+formatNumber(km,1)+" км · "+formatNumber(route.duration/3600,1)+" год орієнтовного руху.");
+ }catch(error){setRouteStatus(error.message||"Помилка побудови маршруту.",true);}
+ finally{button.disabled=false;}
+}
+function renderRouteCosts(segments,totalRouteKm){
+ const consumption=Math.max(0,Number(document.getElementById("route-consumption").value)||0),buffer=Math.max(0,Number(document.getElementById("route-buffer").value)||0),factor=(1+buffer/100)*consumption/100;
+ const tbody=document.getElementById("routeRows");let totalFuel=0,knownCost=0,knownKm=0;
+ tbody.innerHTML=segments.map(s=>{
+  const litres=s.distance*factor,price=s.code?Number(dashboardData.countries?.[s.code]?.eur_per_litre):NaN,cost=Number.isFinite(price)?litres*price:NaN;
+  totalFuel+=litres;if(Number.isFinite(cost)){knownCost+=cost;knownKm+=s.distance;}
+  return "<tr><td class='country'>"+(s.code?names[s.code][0]+" ":"")+s.name+"</td><td>"+formatNumber(s.distance,1)+"</td><td>"+(Number.isFinite(price)?price.toFixed(3)+" €":"Немає даних")+"</td><td>"+formatNumber(litres,1)+"</td><td>"+(Number.isFinite(cost)?formatNumber(cost,2)+" €":"—")+"</td></tr>";
+ }).join("");
+ document.getElementById("routeDistance").textContent=formatNumber(totalRouteKm,1)+" км";
+ document.getElementById("routeLitres").textContent=formatNumber(totalFuel,1)+" л";
+ document.getElementById("routeCost").textContent=formatNumber(knownCost,2)+" €";
+ const coverage=totalRouteKm>0?knownKm/totalRouteKm*100:0;
+ document.getElementById("routeBreakdown").textContent="Вартість порахована для "+formatNumber(coverage,0)+"% маршруту, де є ціни в моніторингу ("+formatNumber(knownKm,1)+" з "+formatNumber(totalRouteKm,1)+" км). Для решти країн показано кілометраж і витрату пального без вартості. Середня витрата: "+formatNumber(consumption,1)+" л/100 км; резерв: "+formatNumber(buffer,1)+"%. Розрахунок не враховує фактичний запас у баку, залишок пального, заправки на конкретних АЗС, AdBlue та дорожні збори.";
 }
 async function initFuelMap(){
  const container=document.getElementById("fuelPriceMap");
