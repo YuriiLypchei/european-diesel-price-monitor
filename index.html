@@ -49,6 +49,9 @@ table{width:100%;border-collapse:collapse}th{text-align:left;color:var(--muted);
 .route-inputs select{width:100%;background:#0d1829;color:var(--text);border:1px solid var(--line);border-radius:9px;padding:11px;font:500 14px "DM Sans",sans-serif}
 .route-stops-field{grid-column:1/-1}
 .route-base-stop{display:grid;grid-template-columns:30px minmax(0,1fr);gap:8px;align-items:center}
+.route-via-row{display:grid;grid-template-columns:145px minmax(0,1fr) 38px;gap:8px;align-items:center}
+.route-via-row select,.route-via-row input{width:100%;min-width:0;background:#0d1829;color:var(--text);border:1px solid var(--line);border-radius:9px;padding:10px;font:500 14px "DM Sans",sans-serif}
+@media(max-width:640px){.route-via-row{grid-template-columns:120px minmax(0,1fr) 36px}}
 .route-sequence{display:grid;place-items:center;width:28px;height:28px;border-radius:50%;background:#1d3548;color:#50d6a0;font-weight:700;font-size:12px}
 .route-base-stop input{width:100%;min-width:0;background:#0d1829;color:var(--text);border:1px solid var(--line);border-radius:9px;padding:10px;font:500 14px "DM Sans",sans-serif}
 #route-via-address{width:100%;background:#0d1829;color:var(--text);border:1px solid var(--line);border-radius:9px;padding:10px;font:500 14px "DM Sans",sans-serif}
@@ -91,7 +94,7 @@ table{width:100%;border-collapse:collapse}th{text-align:left;color:var(--muted);
  <div class="section-head"><div><h2>Route Fuel Calculator</h2><div class="section-intro">Вкажіть адресу завантаження та розвантаження. Система побудує автомобільний маршрут і розподілить кілометраж за країнами.</div></div><span class="pill">Automatic route</span></div>
  <div class="calc-fields route-inputs">
   <div class="calc-field route-stops-field"><label>1. Точки завантаження</label><div class="route-base-stop"><span class="route-sequence">1</span><input id="route-origin" type="text" value="Bratislava, Slovakia" placeholder="Перша адреса завантаження"></div><div id="routeLoadingStops" class="route-stops"></div><button type="button" id="addLoadingStopButton" class="route-add-stop">＋ Додати ще одне завантаження</button></div>
-  <div class="calc-field route-stops-field"><label>2. Країна проходження та місто маршруту (необов'язково)</label><select id="route-via-country"><option value="">Без обмежень · найшвидший маршрут</option><option value="Hungary">Через Угорщину</option><option value="Poland">Через Польщу</option><option value="Czechia">Через Чехію</option><option value="Austria">Через Австрію</option><option value="Slovakia">Через Словаччину</option><option value="Germany">Через Німеччину</option><option value="Lithuania">Через Литву</option><option value="Latvia">Через Латвію</option><option value="Ukraine">Через Україну</option></select><input id="route-via-address" type="text" placeholder="Місто після контрольної точки, напр. Budapest" style="margin-top:8px"></div>
+  <div class="calc-field route-stops-field"><label>2. Проміжні пункти маршруту (необов'язково)</label><div id="routeViaStops" class="route-stops"></div><button type="button" id="addViaStopButton" class="route-add-stop">＋ Додати проміжний пункт</button><small class="route-help">Додавай країни та міста в потрібному порядку. Наприклад: Угорщина → Budapest → Австрія → Wien. Максимум 8 пунктів.</small></div>
   <div class="calc-field route-stops-field"><label>3. Точки розвантаження</label><div class="route-base-stop"><span class="route-sequence">1</span><input id="route-destination" type="text" value="Nürnberg, Germany" placeholder="Перша адреса розвантаження"></div><div id="routeUnloadingStops" class="route-stops"></div><button type="button" id="addUnloadingStopButton" class="route-add-stop">＋ Додати ще одне розвантаження</button><small class="route-help">Точки відвідуються послідовно: усі завантаження → проміжний пункт → усі розвантаження. До 8 додаткових адрес у кожному блоці.</small></div>
   <div class="calc-field"><label for="route-consumption">Витрата, л / 100 км</label><input id="route-consumption" type="number" min="0" step=".1" value="30"></div>
   <div class="calc-field"><label for="route-buffer">Резерв / додатковий пробіг, %</label><input id="route-buffer" type="number" min="0" step=".1" value="5"></div>
@@ -202,8 +205,22 @@ function initRouteCalculator(){
  document.getElementById("buildRouteButton").addEventListener("click",buildAutomaticRoute);
  document.getElementById("addLoadingStopButton").addEventListener("click",()=>addRouteStop("loading"));
  document.getElementById("addUnloadingStopButton").addEventListener("click",()=>addRouteStop("unloading"));
+ document.getElementById("addViaStopButton").addEventListener("click",()=>addViaStop());
  document.getElementById("route-consumption").addEventListener("input",()=>{if(window.lastRouteSegments)renderRouteCosts(window.lastRouteSegments,window.lastRouteDistance)});
  document.getElementById("route-buffer").addEventListener("input",()=>{if(window.lastRouteSegments)renderRouteCosts(window.lastRouteSegments,window.lastRouteDistance)});
+}
+function addViaStop(type="city",value=""){
+ const container=document.getElementById("routeViaStops");
+ if(container.children.length>=8){setRouteStatus("Можна додати максимум 8 проміжних пунктів.",true);return;}
+ const row=document.createElement("div");row.className="route-via-row";
+ const select=document.createElement("select");select.className="route-via-type";select.setAttribute("aria-label","Тип проміжного пункту");
+ [["city","Місто / адреса"],["country","Країна"]].forEach(([v,label])=>{const option=document.createElement("option");option.value=v;option.textContent=label;select.appendChild(option);});
+ const input=document.createElement("input");input.type="text";input.className="route-via-value";input.placeholder="Місто або повна адреса";input.value=value;input.setAttribute("aria-label","Місто або адреса проміжного пункту");
+ const country=document.createElement("select");country.className="route-via-country-value";country.setAttribute("aria-label","Країна проходження");
+ [["Hungary","Угорщина"],["Poland","Польща"],["Czechia","Чехія"],["Austria","Австрія"],["Slovakia","Словаччина"],["Germany","Німеччина"],["Lithuania","Литва"],["Latvia","Латвія"],["Ukraine","Україна"]].forEach(([v,label])=>{const option=document.createElement("option");option.value=v;option.textContent=label;country.appendChild(option);});
+ const remove=document.createElement("button");remove.type="button";remove.className="route-stop-remove";remove.textContent="×";remove.title="Видалити проміжний пункт";remove.addEventListener("click",()=>row.remove());
+ const update=()=>{const isCountry=select.value==="country";if(isCountry){if(input.parentNode===row)input.replaceWith(country);}else{if(country.parentNode===row)country.replaceWith(input);}};
+ select.value=type;row.append(select,input,remove);update();select.addEventListener("change",update);container.appendChild(row);
 }
 function addRouteStop(type){
  const container=document.getElementById(type==="loading"?"routeLoadingStops":"routeUnloadingStops");
@@ -292,19 +309,20 @@ function assignRouteToCountries(coords,geo,officialDistanceKm){
 }
 async function buildAutomaticRoute(){
  const origin=document.getElementById("route-origin").value.trim(),destination=document.getElementById("route-destination").value.trim(),button=document.getElementById("buildRouteButton");
- const viaCountry=document.getElementById("route-via-country").value,viaAddress=document.getElementById("route-via-address").value.trim();
+ const viaRows=[...document.querySelectorAll("#routeViaStops .route-via-row")];
  const loadingStops=[...document.querySelectorAll("#routeLoadingStops .route-stop-address")].map(el=>el.value.trim());
  const unloadingStops=[...document.querySelectorAll("#routeUnloadingStops .route-stop-address")].map(el=>el.value.trim());
- const countryStops={Hungary:"Záhony, Hungary",Poland:"Warsaw, Poland",Czechia:"Prague, Czechia",Austria:"Vienna, Austria",Slovakia:"Bratislava, Slovakia",Germany:"Munich, Germany",Lithuania:"Vilnius, Lithuania",Latvia:"Riga, Latvia",Ukraine:"Lviv, Ukraine"};
+ const countryStops={Hungary:"Záhony, Hungary",Poland:"Warsaw, Poland",Czechia:"Prague, Czechia",Austria:"Nickelsdorf, Austria",Slovakia:"Bratislava, Slovakia",Germany:"Munich, Germany",Lithuania:"Kalvarija, Lithuania",Latvia:"Grenctāle, Latvia",Ukraine:"Chop, Ukraine"};
+ const viaStops=viaRows.map(row=>{const type=row.querySelector(".route-via-type").value;const field=row.querySelector(type==="country"?".route-via-country-value":".route-via-value");return {type,address:field?.value.trim()||"",country:field?.value||""};});
  if(!origin||!destination){setRouteStatus("Вкажіть першу точку завантаження та першу точку розвантаження.",true);return;}
  if(loadingStops.some(x=>!x)||unloadingStops.some(x=>!x)){setRouteStatus("Заповніть усі додані адреси або видаліть порожні рядки.",true);return;}
+ if(viaStops.some(stop=>!stop.address)){setRouteStatus("Заповніть усі проміжні пункти або видаліть порожні рядки.",true);return;}
  button.disabled=true;setRouteStatus("Послідовно шукаю всі адреси маршруту…");
  try{
   const orderedStops=[
    {address:origin,type:"loading"},
    ...loadingStops.map(address=>({address,type:"loading"})),
-   ...(viaCountry?[{address:countryStops[viaCountry],type:"via"}]:[]),
-   ...(viaAddress?[{address:viaAddress,type:"via"}]:[]),
+   ...viaStops.map(stop=>({address:stop.type==="country"?countryStops[stop.country]:stop.address,type:"via"})),
    {address:destination,type:"unloading"},
    ...unloadingStops.map(address=>({address,type:"unloading"}))
   ];
