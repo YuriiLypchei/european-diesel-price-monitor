@@ -89,7 +89,7 @@ def parse_eu(existing):
             "local_price": round(local, 4) if local is not None else round(eur, 4),
             "currency": currency,
             "data_date": week,
-            "source_label": "Єврокомісія · Weekly Oil Bulletin",
+            "source_label": "Єврокомісія · Weekly Oil Bulletin (fuel-prices.eu)",
             "source_url": "https://energy.ec.europa.eu/data-and-analysis/weekly-oil-bulletin_en",
             "history": history,
         }
