@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Fuel & Logistics Intelligence</title>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
 <style>
 :root{--bg:#0b1220;--panel:#121d30;--panel2:#17243a;--line:#26354c;--muted:#8fa1ba;--text:#edf3fb;--green:#50d6a0;--red:#ff7d7d;--blue:#76a9ff}
@@ -32,10 +33,20 @@ table{width:100%;border-collapse:collapse}th{text-align:left;color:var(--muted);
 .module-tile{border:1px solid var(--line);background:#101b2d;border-radius:12px;padding:16px}
 .module-tile strong{display:block;font:700 14px Manrope;margin-bottom:6px}.module-tile span{font-size:12px;color:var(--muted);line-height:1.5}
 @media(max-width:760px){.main-nav{position:relative}.main-nav a{font-size:11px;padding:8px}.calc-grid,.module-grid{grid-template-columns:1fr}.calc-fields{grid-template-columns:1fr 1fr}}
+
+#fuelPriceMap{height:440px;width:100%;border:1px solid var(--line);border-radius:12px;overflow:hidden;background:#101b2d}
+.map-legend{display:flex;gap:14px;flex-wrap:wrap;margin-top:12px;color:var(--muted);font-size:11px}
+.map-legend span{display:flex;align-items:center;gap:6px}.map-swatch{width:12px;height:12px;border-radius:3px;display:inline-block}
+.leaflet-container{font-family:"DM Sans",sans-serif;background:#101b2d}.leaflet-popup-content-wrapper,.leaflet-popup-tip{background:#142238;color:#edf3fb}.leaflet-popup-content{font-size:12px;line-height:1.6}.leaflet-control-attribution{font-size:9px!important}
+.route-table-wrap{overflow-x:auto}.route-table{min-width:560px}.route-table select,.route-table input{width:100%;background:#0d1829;color:var(--text);border:1px solid var(--line);border-radius:8px;padding:9px;font:inherit}
+.route-results{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:14px}.route-result{background:#0e192a;border:1px solid var(--line);border-radius:10px;padding:12px}.route-result span{font-size:11px;color:var(--muted)}.route-result strong{display:block;font:700 19px Manrope;margin-top:5px;color:var(--green)}
+.rank-bar{height:7px;border-radius:8px;background:#26364d;overflow:hidden;min-width:70px}.rank-bar i{display:block;height:100%;background:linear-gradient(90deg,#50d6a0,#76a9ff);border-radius:8px}
+.map-note{margin-top:10px;font-size:11px;color:var(--muted);line-height:1.5}
+@media(max-width:760px){#fuelPriceMap{height:360px}.route-results{grid-template-columns:1fr}.route-result strong{font-size:18px}}
 </style></head>
 <body><main>
 <header class="top"><div><div class="eyebrow">FUEL & LOGISTICS INTELLIGENCE · EUROPE</div><div class="brand">Fuel & Logistics Intelligence</div><div class="sub">Паливний ринок та інструменти для транспортного бізнесу · 8 країн</div></div><div class="stamp">ОСТАННЄ ОНОВЛЕННЯ<strong id="updated">Завантаження…</strong></div></header>
-<nav class="main-nav" aria-label="Головна навігація"><a href="#overview">Огляд ринку</a><a href="#historySection">Динаміка цін</a><a href="#calculators">Калькулятори</a><a href="#transport-costs">Транспортні витрати</a><a href="#market-reports">Звіти</a></nav>
+<nav class="main-nav" aria-label="Головна навігація"><a href="#overview">Огляд ринку</a><a href="#historySection">Динаміка цін</a><a href="#fuelMap">Карта цін</a><a href="#calculators">Калькулятори</a><a href="#routeCalculator">Маршрут</a><a href="#countryComparison">Порівняння</a><a href="#transport-costs">Транспортні витрати</a><a href="#market-reports">Звіти</a></nav>
 <div id="overview" class="cards">
  <div class="card"><div class="kicker">Найнижча ціна · серед доступних даних</div><div class="big" id="cheapest">—</div><div class="hint" id="cheapcountry">Очікування даних</div></div>
  <div class="card"><div class="kicker">Найвища ціна · серед доступних даних</div><div class="big" id="expensive">—</div><div class="hint" id="expensivecountry">Очікування даних</div></div>
@@ -47,7 +58,29 @@ table{width:100%;border-collapse:collapse}th{text-align:left;color:var(--muted);
 <div class="note">Показник — середня національна роздрібна ціна дизельного пального з податками. Він не є гуртовою ціною, ціною картки паливної мережі чи ціною на конкретній АЗС.</div></section>
 <section class="section" id="historySection"><div class="section-head"><h2>Динаміка цін</h2><span class="pill">Історія · EUR / літр</span></div><div class="chart-controls"><label>Період<select id="periodSelect"><option value="3">Останні 3 місяці</option><option value="6">Останні 6 місяців</option><option value="12" selected>Останні 12 місяців</option></select></label><label>Країна<select id="countrySelect"><option value="ALL">Усі країни</option><option value="UA">Україна</option><option value="SK">Словаччина</option><option value="CZ">Чехія</option><option value="AT">Австрія</option><option value="DE">Німеччина</option><option value="PL">Польща</option><option value="LT">Литва</option><option value="LV">Латвія</option></select></label></div><div class="chart-wrap"><svg id="historyChart" viewBox="0 0 900 340" role="img" aria-label="Графік зміни середньої ціни дизельного пального"></svg></div><div class="chart-legend" id="chartLegend"></div><div class="chart-summary" id="chartSummary"></div><div class="note">Зміна розраховується від першого до останнього доступного значення в обраному періоді. Для України історія починає накопичуватися після підключення джерела; графік з'являтиметься в міру надходження нових даних.</div></section>
 
-<section class="section" id="calculators">
+
+<section class="section" id="fuelMap">
+ <div class="section-head"><div><h2>Fuel Price Map</h2><div class="section-intro">Карта середніх роздрібних цін на дизель у країнах моніторингу. Натисніть на країну, щоб побачити ціну та дату даних.</div></div><span class="pill">Europe · EUR / litre</span></div>
+ <div id="fuelPriceMap" role="application" aria-label="Інтерактивна карта цін на дизель у Європі"><div class="chart-empty">Завантаження карти…</div></div>
+ <div class="map-legend"><span><i class="map-swatch" style="background:#238b68"></i>Нижча ціна</span><span><i class="map-swatch" style="background:#d1a84b"></i>Середня ціна</span><span><i class="map-swatch" style="background:#bd5b61"></i>Вища ціна</span><span><i class="map-swatch" style="background:#35445a"></i>Інші країни</span></div>
+ <div class="map-note">Карта використовує зовнішні картографічні дані OpenStreetMap та межі країн GeoJSON. Ціни відображають національні середні значення з різною періодичністю оновлення залежно від джерела.</div>
+</section>
+<section class="section" id="routeCalculator">
+ <div class="section-head"><div><h2>Route Fuel Calculator</h2><div class="section-intro">Розподіліть кілометраж маршруту між країнами. Калькулятор оцінить заправку за середньою ціною дизеля кожної країни.</div></div><span class="pill">Route planning</span></div>
+ <div class="calc-fields" style="max-width:420px;margin-bottom:15px">
+  <div class="calc-field"><label for="route-consumption">Витрата, л / 100 км</label><input id="route-consumption" type="number" min="0" step=".1" value="30"></div>
+  <div class="calc-field"><label for="route-buffer">Резерв / додатковий пробіг, %</label><input id="route-buffer" type="number" min="0" step=".1" value="5"></div>
+ </div>
+ <div class="route-table-wrap"><table class="route-table"><thead><tr><th>Країна</th><th>Відстань у країні, км</th><th>Орієнтовна ціна, €/л</th><th>Пальне, л</th><th>Вартість, €</th></tr></thead><tbody id="routeRows"></tbody></table></div>
+ <div class="route-results"><div class="route-result"><span>Загальна відстань</span><strong id="routeDistance">0 км</strong></div><div class="route-result"><span>Потрібно пального</span><strong id="routeLitres">0 л</strong></div><div class="route-result"><span>Орієнтовна вартість</span><strong id="routeCost">0,00 €</strong></div></div>
+ <div id="routeBreakdown" class="note">Вкажіть кілометраж для країн маршруту. Розрахунок використовує національні середні ціни, а не фактичні ціни конкретних АЗС.</div>
+</section>
+<section class="section" id="countryComparison">
+ <div class="section-head"><div><h2>Country Comparison</h2><div class="section-intro">Рейтинг країн за ціною дизеля, різниця з найдешевшим ринком та дата останніх доступних даних.</div></div><span class="pill">Live comparison</span></div>
+ <div class="route-table-wrap"><table><thead><tr><th>Місце</th><th>Країна</th><th>Ціна, €/л</th><th>Різниця до мінімуму</th><th>Дата даних</th></tr></thead><tbody id="comparisonRows"><tr><td colspan="5" class="muted">Завантаження даних…</td></tr></tbody></table></div>
+ <div class="note">Рейтинг формується за останньою доступною ціною. Перевіряйте дату кожної країни: показники ЄС зазвичай щотижневі, а український показник — окреме джерело з конвертацією за курсом НБУ.</div>
+</section>
+\n<section class="section" id="calculators">
   <div class="section-head"><div><h2>Logistics Calculators</h2><div class="section-intro">Оцініть витрати на дизель та розрахуйте орієнтовну паливну надбавку для транспортної ставки.</div></div><span class="pill">Interactive tools</span></div>
   <div class="calc-grid">
     <div class="calc-card">
@@ -109,7 +142,71 @@ for(const s of series){const pts=s.points.slice().sort((a,b)=>a.date.localeCompa
 svg.innerHTML=markup;legend.innerHTML=series.map(s=>'<span class="legend-item"><i class="legend-dot" style="background:'+s.color+'"></i>'+s.name+"</span>").join("");
 summary.innerHTML=series.map(s=>{const pts=s.points.slice().sort((a,b)=>a.date.localeCompare(b.date)),first=pts[0],last=pts[pts.length-1],delta=pts.length>1?(last.eur_per_litre/first.eur_per_litre-1)*100:null;return '<div class="change-item"><span class="muted">'+s.name+'</span><strong>'+last.eur_per_litre.toFixed(3)+' €</strong><span class="'+(delta===null?"muted":delta>0?"red":delta<0?"green":"muted")+'">'+(delta===null?"Поки 1 точка":(delta>0?"+":"")+delta.toFixed(1)+"% за період")+"</span></div>";}).join("");
 }
-function numberInput(id){const v=Number(document.getElementById(id).value);return Number.isFinite(v)&&v>0?v:0}
+
+const isoByCode={UA:"UKR",SK:"SVK",CZ:"CZE",AT:"AUT",DE:"DEU",PL:"POL",LT:"LTU",LV:"LVA"};
+function currentCountryRows(){
+ return Object.entries(names).map(([code,n])=>({code,name:n[1],flag:n[0],...(dashboardData?.countries?.[code]||{})}));
+}
+function renderComparison(){
+ const rows=currentCountryRows().filter(x=>Number.isFinite(x.eur_per_litre)).sort((a,b)=>a.eur_per_litre-b.eur_per_litre);
+ const min=rows.length?rows[0].eur_per_litre:0;
+ document.getElementById("comparisonRows").innerHTML=rows.map((x,i)=>'<tr><td>'+(i+1)+'</td><td class="country"><span class="flag">'+x.flag+'</span>'+x.name+'</td><td class="price">'+x.eur_per_litre.toFixed(3)+' €</td><td>'+(x.eur_per_litre-min>0?'+'+(x.eur_per_litre-min).toFixed(3)+' €':'—')+'</td><td>'+((x.data_date)||'—')+'</td></tr>').join("")||'<tr><td colspan="5">Немає доступних даних</td></tr>';
+}
+function initRouteCalculator(){
+ const body=document.getElementById("routeRows");
+ const opts=currentCountryRows().map(x=>'<option value="'+x.code+'">'+x.flag+' '+x.name+'</option>').join("");
+ const defaults=[["SK",300],["AT",500],["DE",900],["CZ",0],["PL",0]];
+ body.innerHTML=defaults.map((v,i)=>'<tr><td><select class="route-country" aria-label="Країна ділянки '+(i+1)+'">'+opts+'</select></td><td><input class="route-km" type="number" min="0" step="1" value="'+v[1]+'" aria-label="Кілометри ділянки '+(i+1)+'"></td><td class="route-price muted">—</td><td class="route-litres">0,0</td><td class="route-cost">0,00 €</td></tr>').join("");
+ body.querySelectorAll(".route-country").forEach((el,i)=>{el.value=defaults[i][0];el.addEventListener("change",calculateRoute)});
+ body.querySelectorAll(".route-km").forEach(el=>el.addEventListener("input",calculateRoute));
+ document.getElementById("route-consumption").addEventListener("input",calculateRoute);
+ document.getElementById("route-buffer").addEventListener("input",calculateRoute);
+ calculateRoute();
+}
+function calculateRoute(){
+ if(!dashboardData)return;
+ const consumption=Math.max(0,Number(document.getElementById("route-consumption").value)||0);
+ const buffer=Math.max(0,Number(document.getElementById("route-buffer").value)||0);
+ const trs=[...document.querySelectorAll("#routeRows tr")];let totalKm=0,totalLitres=0,totalCost=0,parts=[];
+ trs.forEach(tr=>{
+  const code=tr.querySelector(".route-country").value,km=Math.max(0,Number(tr.querySelector(".route-km").value)||0),country=dashboardData.countries?.[code]||{},price=Number(country.eur_per_litre);
+  const litres=km*(1+buffer/100)*consumption/100,cost=Number.isFinite(price)?litres*price:0;
+  totalKm+=km;totalLitres+=litres;if(Number.isFinite(price))totalCost+=cost;
+  tr.querySelector(".route-price").textContent=Number.isFinite(price)?price.toFixed(3)+" €":"Немає даних";
+  tr.querySelector(".route-litres").textContent=formatNumber(litres,1);
+  tr.querySelector(".route-cost").textContent=Number.isFinite(price)?formatNumber(cost,2)+" €":"—";
+  if(km>0)parts.push(names[code][1]+": "+formatNumber(cost,2)+" €");
+ });
+ document.getElementById("routeDistance").textContent=formatNumber(totalKm,0)+" км";
+ document.getElementById("routeLitres").textContent=formatNumber(totalLitres,1)+" л";
+ document.getElementById("routeCost").textContent=formatNumber(totalCost,2)+" €";
+ document.getElementById("routeBreakdown").textContent=parts.length?"Вартість за ділянками: "+parts.join(" · ")+". Ціни — національні середні, тому результат є орієнтовним.": "Вкажіть кілометраж для країн маршруту.";
+}
+async function initFuelMap(){
+ const container=document.getElementById("fuelPriceMap");
+ try{
+  if(!window.L){
+   await new Promise((resolve,reject)=>{const s=document.createElement("script");s.src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js";s.onload=resolve;s.onerror=reject;document.head.appendChild(s)});
+  }
+  const map=L.map("fuelPriceMap",{scrollWheelZoom:false}).setView([51.2,17.5],4);
+  L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",{maxZoom:9,attribution:'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'}).addTo(map);
+  const geo=await fetch("https://raw.githubusercontent.com/datasets/geo-countries/master/data/countries.geojson");
+  if(!geo.ok)throw Error("Не вдалося завантажити географічні межі");
+  const gj=await geo.json(),rows=currentCountryRows().filter(x=>Number.isFinite(x.eur_per_litre));
+  const vals=rows.map(x=>x.eur_per_litre),lo=Math.min(...vals),hi=Math.max(...vals);
+  const featureLayer=L.geoJSON(gj,{filter:feature=>rows.some(x=>isoByCode[x.code]===feature.properties.ISO_A3||isoByCode[x.code]===feature.properties.ADM0_A3),style:feature=>{
+   const row=rows.find(x=>isoByCode[x.code]===feature.properties.ISO_A3||isoByCode[x.code]===feature.properties.ADM0_A3);
+   const ratio=hi===lo?0.5:(row.eur_per_litre-lo)/(hi-lo);
+   return {color:"#d6e1ef",weight:1,fillColor:ratio<.33?"#238b68":ratio<.66?"#d1a84b":"#bd5b61",fillOpacity:.78};
+  },onEachFeature:(feature,layer)=>{
+   const row=rows.find(x=>isoByCode[x.code]===feature.properties.ISO_A3||isoByCode[x.code]===feature.properties.ADM0_A3);
+   if(row)layer.bindPopup("<strong>"+row.flag+" "+row.name+"</strong><br>"+row.eur_per_litre.toFixed(3)+" €/л<br>Дані: "+(row.data_date||"—")+"<br><span style='color:#9aabc0'>"+(row.source_label||"")+"</span>");
+  }}).addTo(map);
+  if(featureLayer.getBounds().isValid())map.fitBounds(featureLayer.getBounds().pad(.22));
+  setTimeout(()=>map.invalidateSize(),150);
+ }catch(err){container.innerHTML='<div class="chart-empty">Карту не вдалося завантажити. Перевірте підключення до зовнішніх картографічних сервісів. Дані та калькулятори продовжують працювати.</div>';}
+}
+\nfunction numberInput(id){const v=Number(document.getElementById(id).value);return Number.isFinite(v)&&v>0?v:0}
 function formatNumber(v,d=2){return v.toLocaleString("uk-UA",{minimumFractionDigits:d,maximumFractionDigits:d})}
 function updateCalculators(){
  const distance=numberInput("fc-distance"),consumption=numberInput("fc-consumption"),price=numberInput("fc-price"),extra=numberInput("fc-extra");
