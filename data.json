@@ -1,29 +1,2335 @@
 {
-  "generated_at": "Очікує першого автоматичного оновлення",
+  "generated_at": "2026-10-30T14:41:56+00:00",
   "countries": {
     "UA": {
-      "source_label": "Джерело ще не підключено"
+      "eur_per_litre": 2.0561,
+      "local_price": 104.2,
+      "currency": "UAH",
+      "data_date": "2026-10-30",
+      "fx_rate": 50.6796,
+      "fx_rate_date": "2026-10-30",
+      "source_label": "АЗС24 · середня по Україні",
+      "source_url": "https://azs24.com.ua/dp/",
+      "history": [
+        {
+          "date": "2026-10-30",
+          "local_price": 104.2,
+          "eur_per_litre": 2.0561,
+          "currency": "UAH"
+        }
+      ]
     },
     "SK": {
-      "source_label": "Очікує оновлення"
+      "eur_per_litre": 1.97,
+      "local_price": 1.97,
+      "currency": "EUR",
+      "data_date": "2026-10-26",
+      "source_label": "Єврокомісія · Weekly Oil Bulletin (fuel-prices.eu)",
+      "source_url": "https://energy.ec.europa.eu/data-and-analysis/weekly-oil-bulletin_en",
+      "history": [
+        {
+          "date": "2025-10-27",
+          "eur_per_litre": 1.428,
+          "local_price": 1.428,
+          "currency": "EUR"
+        },
+        {
+          "date": "2025-11-03",
+          "eur_per_litre": 1.467,
+          "local_price": 1.467,
+          "currency": "EUR"
+        },
+        {
+          "date": "2025-11-10",
+          "eur_per_litre": 1.463,
+          "local_price": 1.463,
+          "currency": "EUR"
+        },
+        {
+          "date": "2025-11-17",
+          "eur_per_litre": 1.514,
+          "local_price": 1.514,
+          "currency": "EUR"
+        },
+        {
+          "date": "2025-11-24",
+          "eur_per_litre": 1.517,
+          "local_price": 1.517,
+          "currency": "EUR"
+        },
+        {
+          "date": "2025-12-01",
+          "eur_per_litre": 1.491,
+          "local_price": 1.491,
+          "currency": "EUR"
+        },
+        {
+          "date": "2025-12-08",
+          "eur_per_litre": 1.454,
+          "local_price": 1.454,
+          "currency": "EUR"
+        },
+        {
+          "date": "2025-12-15",
+          "eur_per_litre": 1.432,
+          "local_price": 1.432,
+          "currency": "EUR"
+        },
+        {
+          "date": "2025-12-22",
+          "eur_per_litre": 1.408,
+          "local_price": 1.408,
+          "currency": "EUR"
+        },
+        {
+          "date": "2025-12-29",
+          "eur_per_litre": 1.4,
+          "local_price": 1.4,
+          "currency": "EUR"
+        },
+        {
+          "date": "2026-01-05",
+          "eur_per_litre": 1.401,
+          "local_price": 1.401,
+          "currency": "EUR"
+        },
+        {
+          "date": "2026-01-12",
+          "eur_per_litre": 1.388,
+          "local_price": 1.388,
+          "currency": "EUR"
+        },
+        {
+          "date": "2026-01-19",
+          "eur_per_litre": 1.402,
+          "local_price": 1.402,
+          "currency": "EUR"
+        },
+        {
+          "date": "2026-01-26",
+          "eur_per_litre": 1.427,
+          "local_price": 1.427,
+          "currency": "EUR"
+        },
+        {
+          "date": "2026-02-02",
+          "eur_per_litre": 1.448,
+          "local_price": 1.448,
+          "currency": "EUR"
+        },
+        {
+          "date": "2026-02-09",
+          "eur_per_litre": 1.466,
+          "local_price": 1.466,
+          "currency": "EUR"
+        },
+        {
+          "date": "2026-02-16",
+          "eur_per_litre": 1.467,
+          "local_price": 1.467,
+          "currency": "EUR"
+        },
+        {
+          "date": "2026-02-23",
+          "eur_per_litre": 1.467,
+          "local_price": 1.467,
+          "currency": "EUR"
+        },
+        {
+          "date": "2026-03-02",
+          "eur_per_litre": 1.466,
+          "local_price": 1.466,
+          "currency": "EUR"
+        },
+        {
+          "date": "2026-03-09",
+          "eur_per_litre": 1.483,
+          "local_price": 1.483,
+          "currency": "EUR"
+        },
+        {
+          "date": "2026-03-16",
+          "eur_per_litre": 1.528,
+          "local_price": 1.528,
+          "currency": "EUR"
+        },
+        {
+          "date": "2026-03-23",
+          "eur_per_litre": 1.573,
+          "local_price": 1.573,
+          "currency": "EUR"
+        },
+        {
+          "date": "2026-03-30",
+          "eur_per_litre": 1.687,
+          "local_price": 1.687,
+          "currency": "EUR"
+        },
+        {
+          "date": "2026-04-06",
+          "eur_per_litre": 1.751,
+          "local_price": 1.751,
+          "currency": "EUR"
+        },
+        {
+          "date": "2026-04-13",
+          "eur_per_litre": 1.75,
+          "local_price": 1.75,
+          "currency": "EUR"
+        },
+        {
+          "date": "2026-04-20",
+          "eur_per_litre": 1.772,
+          "local_price": 1.772,
+          "currency": "EUR"
+        },
+        {
+          "date": "2026-04-27",
+          "eur_per_litre": 1.787,
+          "local_price": 1.787,
+          "currency": "EUR"
+        },
+        {
+          "date": "2026-05-04",
+          "eur_per_litre": 1.849,
+          "local_price": 1.849,
+          "currency": "EUR"
+        },
+        {
+          "date": "2026-05-11",
+          "eur_per_litre": 1.77,
+          "local_price": 1.77,
+          "currency": "EUR"
+        },
+        {
+          "date": "2026-05-18",
+          "eur_per_litre": 1.71,
+          "local_price": 1.71,
+          "currency": "EUR"
+        },
+        {
+          "date": "2026-05-25",
+          "eur_per_litre": 1.718,
+          "local_price": 1.718,
+          "currency": "EUR"
+        },
+        {
+          "date": "2026-06-01",
+          "eur_per_litre": 1.648,
+          "local_price": 1.648,
+          "currency": "EUR"
+        },
+        {
+          "date": "2026-06-08",
+          "eur_per_litre": 1.627,
+          "local_price": 1.627,
+          "currency": "EUR"
+        },
+        {
+          "date": "2026-06-15",
+          "eur_per_litre": 1.628,
+          "local_price": 1.628,
+          "currency": "EUR"
+        },
+        {
+          "date": "2026-06-22",
+          "eur_per_litre": 1.526,
+          "local_price": 1.526,
+          "currency": "EUR"
+        },
+        {
+          "date": "2026-06-29",
+          "eur_per_litre": 1.485,
+          "local_price": 1.485,
+          "currency": "EUR"
+        },
+        {
+          "date": "2026-07-06",
+          "eur_per_litre": 1.522,
+          "local_price": 1.522,
+          "currency": "EUR"
+        },
+        {
+          "date": "2026-07-13",
+          "eur_per_litre": 1.603,
+          "local_price": 1.603,
+          "currency": "EUR"
+        },
+        {
+          "date": "2026-07-20",
+          "eur_per_litre": 1.668,
+          "local_price": 1.668,
+          "currency": "EUR"
+        },
+        {
+          "date": "2026-07-27",
+          "eur_per_litre": 1.737,
+          "local_price": 1.737,
+          "currency": "EUR"
+        },
+        {
+          "date": "2026-08-03",
+          "eur_per_litre": 1.809,
+          "local_price": 1.809,
+          "currency": "EUR"
+        },
+        {
+          "date": "2026-08-10",
+          "eur_per_litre": 1.833,
+          "local_price": 1.833,
+          "currency": "EUR"
+        },
+        {
+          "date": "2026-08-17",
+          "eur_per_litre": 1.832,
+          "local_price": 1.832,
+          "currency": "EUR"
+        },
+        {
+          "date": "2026-08-24",
+          "eur_per_litre": 1.862,
+          "local_price": 1.862,
+          "currency": "EUR"
+        },
+        {
+          "date": "2026-08-31",
+          "eur_per_litre": 1.883,
+          "local_price": 1.883,
+          "currency": "EUR"
+        },
+        {
+          "date": "2026-09-07",
+          "eur_per_litre": 1.908,
+          "local_price": 1.908,
+          "currency": "EUR"
+        },
+        {
+          "date": "2026-09-14",
+          "eur_per_litre": 1.924,
+          "local_price": 1.924,
+          "currency": "EUR"
+        },
+        {
+          "date": "2026-09-21",
+          "eur_per_litre": 1.95,
+          "local_price": 1.95,
+          "currency": "EUR"
+        },
+        {
+          "date": "2026-09-28",
+          "eur_per_litre": 1.978,
+          "local_price": 1.978,
+          "currency": "EUR"
+        },
+        {
+          "date": "2026-10-05",
+          "eur_per_litre": 1.972,
+          "local_price": 1.972,
+          "currency": "EUR"
+        },
+        {
+          "date": "2026-10-12",
+          "eur_per_litre": 1.919,
+          "local_price": 1.919,
+          "currency": "EUR"
+        },
+        {
+          "date": "2026-10-19",
+          "eur_per_litre": 1.952,
+          "local_price": 1.952,
+          "currency": "EUR"
+        },
+        {
+          "date": "2026-10-26",
+          "eur_per_litre": 1.97,
+          "local_price": 1.97,
+          "currency": "EUR"
+        }
+      ]
     },
     "CZ": {
-      "source_label": "Очікує оновлення"
+      "eur_per_litre": 1.95,
+      "local_price": 47.508,
+      "currency": "CZK",
+      "data_date": "2026-10-26",
+      "source_label": "Єврокомісія · Weekly Oil Bulletin (fuel-prices.eu)",
+      "source_url": "https://energy.ec.europa.eu/data-and-analysis/weekly-oil-bulletin_en",
+      "history": [
+        {
+          "date": "2025-10-27",
+          "eur_per_litre": 1.356,
+          "local_price": 32.992,
+          "currency": "CZK"
+        },
+        {
+          "date": "2025-11-03",
+          "eur_per_litre": 1.371,
+          "local_price": 33.368,
+          "currency": "CZK"
+        },
+        {
+          "date": "2025-11-10",
+          "eur_per_litre": 1.39,
+          "local_price": 33.757,
+          "currency": "CZK"
+        },
+        {
+          "date": "2025-11-17",
+          "eur_per_litre": 1.417,
+          "local_price": 34.258,
+          "currency": "CZK"
+        },
+        {
+          "date": "2025-11-24",
+          "eur_per_litre": 1.438,
+          "local_price": 34.751,
+          "currency": "CZK"
+        },
+        {
+          "date": "2025-12-01",
+          "eur_per_litre": 1.431,
+          "local_price": 34.605,
+          "currency": "CZK"
+        },
+        {
+          "date": "2025-12-08",
+          "eur_per_litre": 1.402,
+          "local_price": 34.014,
+          "currency": "CZK"
+        },
+        {
+          "date": "2025-12-15",
+          "eur_per_litre": 1.378,
+          "local_price": 33.474,
+          "currency": "CZK"
+        },
+        {
+          "date": "2025-12-22",
+          "eur_per_litre": 1.346,
+          "local_price": 32.723,
+          "currency": "CZK"
+        },
+        {
+          "date": "2025-12-29",
+          "eur_per_litre": 1.345,
+          "local_price": 32.659,
+          "currency": "CZK"
+        },
+        {
+          "date": "2026-01-05",
+          "eur_per_litre": 1.343,
+          "local_price": 32.503,
+          "currency": "CZK"
+        },
+        {
+          "date": "2026-01-12",
+          "eur_per_litre": 1.332,
+          "local_price": 32.359,
+          "currency": "CZK"
+        },
+        {
+          "date": "2026-01-19",
+          "eur_per_litre": 1.331,
+          "local_price": 32.338,
+          "currency": "CZK"
+        },
+        {
+          "date": "2026-01-26",
+          "eur_per_litre": 1.341,
+          "local_price": 32.531,
+          "currency": "CZK"
+        },
+        {
+          "date": "2026-02-02",
+          "eur_per_litre": 1.35,
+          "local_price": 32.818,
+          "currency": "CZK"
+        },
+        {
+          "date": "2026-02-09",
+          "eur_per_litre": 1.362,
+          "local_price": 32.992,
+          "currency": "CZK"
+        },
+        {
+          "date": "2026-02-16",
+          "eur_per_litre": 1.357,
+          "local_price": 32.923,
+          "currency": "CZK"
+        },
+        {
+          "date": "2026-02-23",
+          "eur_per_litre": 1.363,
+          "local_price": 33.004,
+          "currency": "CZK"
+        },
+        {
+          "date": "2026-03-02",
+          "eur_per_litre": 1.38,
+          "local_price": 33.486,
+          "currency": "CZK"
+        },
+        {
+          "date": "2026-03-09",
+          "eur_per_litre": 1.604,
+          "local_price": 39.128,
+          "currency": "CZK"
+        },
+        {
+          "date": "2026-03-16",
+          "eur_per_litre": 1.741,
+          "local_price": 42.541,
+          "currency": "CZK"
+        },
+        {
+          "date": "2026-03-23",
+          "eur_per_litre": 1.934,
+          "local_price": 47.264,
+          "currency": "CZK"
+        },
+        {
+          "date": "2026-03-30",
+          "eur_per_litre": 1.967,
+          "local_price": 48.29,
+          "currency": "CZK"
+        },
+        {
+          "date": "2026-04-06",
+          "eur_per_litre": 1.977,
+          "local_price": 48.512,
+          "currency": "CZK"
+        },
+        {
+          "date": "2026-04-13",
+          "eur_per_litre": 1.869,
+          "local_price": 45.567,
+          "currency": "CZK"
+        },
+        {
+          "date": "2026-04-20",
+          "eur_per_litre": 1.756,
+          "local_price": 42.654,
+          "currency": "CZK"
+        },
+        {
+          "date": "2026-04-27",
+          "eur_per_litre": 1.707,
+          "local_price": 41.589,
+          "currency": "CZK"
+        },
+        {
+          "date": "2026-05-04",
+          "eur_per_litre": 1.764,
+          "local_price": 43.027,
+          "currency": "CZK"
+        },
+        {
+          "date": "2026-05-11",
+          "eur_per_litre": 1.75,
+          "local_price": 42.594,
+          "currency": "CZK"
+        },
+        {
+          "date": "2026-05-18",
+          "eur_per_litre": 1.673,
+          "local_price": 40.689,
+          "currency": "CZK"
+        },
+        {
+          "date": "2026-05-25",
+          "eur_per_litre": 1.677,
+          "local_price": 40.694,
+          "currency": "CZK"
+        },
+        {
+          "date": "2026-06-01",
+          "eur_per_litre": 1.584,
+          "local_price": 38.458,
+          "currency": "CZK"
+        },
+        {
+          "date": "2026-06-08",
+          "eur_per_litre": 1.577,
+          "local_price": 38.206,
+          "currency": "CZK"
+        },
+        {
+          "date": "2026-06-15",
+          "eur_per_litre": 1.566,
+          "local_price": 37.822,
+          "currency": "CZK"
+        },
+        {
+          "date": "2026-06-22",
+          "eur_per_litre": 1.473,
+          "local_price": 35.635,
+          "currency": "CZK"
+        },
+        {
+          "date": "2026-06-29",
+          "eur_per_litre": 1.445,
+          "local_price": 35.063,
+          "currency": "CZK"
+        },
+        {
+          "date": "2026-07-06",
+          "eur_per_litre": 1.47,
+          "local_price": 35.503,
+          "currency": "CZK"
+        },
+        {
+          "date": "2026-07-13",
+          "eur_per_litre": 1.516,
+          "local_price": 36.786,
+          "currency": "CZK"
+        },
+        {
+          "date": "2026-07-20",
+          "eur_per_litre": 1.707,
+          "local_price": 41.297,
+          "currency": "CZK"
+        },
+        {
+          "date": "2026-07-27",
+          "eur_per_litre": 1.814,
+          "local_price": 43.83,
+          "currency": "CZK"
+        },
+        {
+          "date": "2026-08-03",
+          "eur_per_litre": 1.844,
+          "local_price": 44.631,
+          "currency": "CZK"
+        },
+        {
+          "date": "2026-08-10",
+          "eur_per_litre": 1.813,
+          "local_price": 43.973,
+          "currency": "CZK"
+        },
+        {
+          "date": "2026-08-17",
+          "eur_per_litre": 1.844,
+          "local_price": 44.626,
+          "currency": "CZK"
+        },
+        {
+          "date": "2026-08-24",
+          "eur_per_litre": 1.899,
+          "local_price": 45.76,
+          "currency": "CZK"
+        },
+        {
+          "date": "2026-08-31",
+          "eur_per_litre": 1.903,
+          "local_price": 45.915,
+          "currency": "CZK"
+        },
+        {
+          "date": "2026-09-07",
+          "eur_per_litre": 1.958,
+          "local_price": 47.389,
+          "currency": "CZK"
+        },
+        {
+          "date": "2026-09-14",
+          "eur_per_litre": 1.991,
+          "local_price": 48.366,
+          "currency": "CZK"
+        },
+        {
+          "date": "2026-09-21",
+          "eur_per_litre": 2.071,
+          "local_price": 50.434,
+          "currency": "CZK"
+        },
+        {
+          "date": "2026-09-28",
+          "eur_per_litre": 2.076,
+          "local_price": 50.649,
+          "currency": "CZK"
+        },
+        {
+          "date": "2026-10-05",
+          "eur_per_litre": 1.952,
+          "local_price": 47.741,
+          "currency": "CZK"
+        },
+        {
+          "date": "2026-10-12",
+          "eur_per_litre": 1.921,
+          "local_price": 46.86,
+          "currency": "CZK"
+        },
+        {
+          "date": "2026-10-19",
+          "eur_per_litre": 1.953,
+          "local_price": 47.551,
+          "currency": "CZK"
+        },
+        {
+          "date": "2026-10-26",
+          "eur_per_litre": 1.95,
+          "local_price": 47.508,
+          "currency": "CZK"
+        }
+      ]
     },
     "AT": {
-      "source_label": "Очікує оновлення"
+      "eur_per_litre": 2.132,
+      "local_price": 2.132,
+      "currency": "EUR",
+      "data_date": "2026-10-26",
+      "source_label": "Єврокомісія · Weekly Oil Bulletin (fuel-prices.eu)",
+      "source_url": "https://energy.ec.europa.eu/data-and-analysis/weekly-oil-bulletin_en",
+      "history": [
+        {
+          "date": "2025-10-27",
+          "eur_per_litre": 1.532,
+          "local_price": 1.532,
+          "currency": "EUR"
+        },
+        {
+          "date": "2025-11-03",
+          "eur_per_litre": 1.531,
+          "local_price": 1.531,
+          "currency": "EUR"
+        },
+        {
+          "date": "2025-11-10",
+          "eur_per_litre": 1.575,
+          "local_price": 1.575,
+          "currency": "EUR"
+        },
+        {
+          "date": "2025-11-17",
+          "eur_per_litre": 1.575,
+          "local_price": 1.575,
+          "currency": "EUR"
+        },
+        {
+          "date": "2025-11-24",
+          "eur_per_litre": 1.595,
+          "local_price": 1.595,
+          "currency": "EUR"
+        },
+        {
+          "date": "2025-12-01",
+          "eur_per_litre": 1.568,
+          "local_price": 1.568,
+          "currency": "EUR"
+        },
+        {
+          "date": "2025-12-08",
+          "eur_per_litre": 1.526,
+          "local_price": 1.526,
+          "currency": "EUR"
+        },
+        {
+          "date": "2025-12-15",
+          "eur_per_litre": 1.515,
+          "local_price": 1.515,
+          "currency": "EUR"
+        },
+        {
+          "date": "2025-12-22",
+          "eur_per_litre": 1.498,
+          "local_price": 1.498,
+          "currency": "EUR"
+        },
+        {
+          "date": "2025-12-29",
+          "eur_per_litre": 1.492,
+          "local_price": 1.492,
+          "currency": "EUR"
+        },
+        {
+          "date": "2026-01-05",
+          "eur_per_litre": 1.495,
+          "local_price": 1.495,
+          "currency": "EUR"
+        },
+        {
+          "date": "2026-01-12",
+          "eur_per_litre": 1.477,
+          "local_price": 1.477,
+          "currency": "EUR"
+        },
+        {
+          "date": "2026-01-19",
+          "eur_per_litre": 1.487,
+          "local_price": 1.487,
+          "currency": "EUR"
+        },
+        {
+          "date": "2026-01-26",
+          "eur_per_litre": 1.509,
+          "local_price": 1.509,
+          "currency": "EUR"
+        },
+        {
+          "date": "2026-02-02",
+          "eur_per_litre": 1.52,
+          "local_price": 1.52,
+          "currency": "EUR"
+        },
+        {
+          "date": "2026-02-09",
+          "eur_per_litre": 1.529,
+          "local_price": 1.529,
+          "currency": "EUR"
+        },
+        {
+          "date": "2026-02-16",
+          "eur_per_litre": 1.518,
+          "local_price": 1.518,
+          "currency": "EUR"
+        },
+        {
+          "date": "2026-02-23",
+          "eur_per_litre": 1.546,
+          "local_price": 1.546,
+          "currency": "EUR"
+        },
+        {
+          "date": "2026-03-02",
+          "eur_per_litre": 1.564,
+          "local_price": 1.564,
+          "currency": "EUR"
+        },
+        {
+          "date": "2026-03-09",
+          "eur_per_litre": 1.898,
+          "local_price": 1.898,
+          "currency": "EUR"
+        },
+        {
+          "date": "2026-03-16",
+          "eur_per_litre": 1.954,
+          "local_price": 1.954,
+          "currency": "EUR"
+        },
+        {
+          "date": "2026-03-23",
+          "eur_per_litre": 2.109,
+          "local_price": 2.109,
+          "currency": "EUR"
+        },
+        {
+          "date": "2026-03-30",
+          "eur_per_litre": 2.204,
+          "local_price": 2.204,
+          "currency": "EUR"
+        },
+        {
+          "date": "2026-04-06",
+          "eur_per_litre": 2.228,
+          "local_price": 2.228,
+          "currency": "EUR"
+        },
+        {
+          "date": "2026-04-13",
+          "eur_per_litre": 2.075,
+          "local_price": 2.075,
+          "currency": "EUR"
+        },
+        {
+          "date": "2026-04-20",
+          "eur_per_litre": 1.948,
+          "local_price": 1.948,
+          "currency": "EUR"
+        },
+        {
+          "date": "2026-04-27",
+          "eur_per_litre": 1.91,
+          "local_price": 1.91,
+          "currency": "EUR"
+        },
+        {
+          "date": "2026-05-04",
+          "eur_per_litre": 1.999,
+          "local_price": 1.999,
+          "currency": "EUR"
+        },
+        {
+          "date": "2026-05-11",
+          "eur_per_litre": 1.913,
+          "local_price": 1.913,
+          "currency": "EUR"
+        },
+        {
+          "date": "2026-05-18",
+          "eur_per_litre": 1.914,
+          "local_price": 1.914,
+          "currency": "EUR"
+        },
+        {
+          "date": "2026-05-25",
+          "eur_per_litre": 1.906,
+          "local_price": 1.906,
+          "currency": "EUR"
+        },
+        {
+          "date": "2026-06-01",
+          "eur_per_litre": 1.83,
+          "local_price": 1.83,
+          "currency": "EUR"
+        },
+        {
+          "date": "2026-06-08",
+          "eur_per_litre": 1.831,
+          "local_price": 1.831,
+          "currency": "EUR"
+        },
+        {
+          "date": "2026-06-15",
+          "eur_per_litre": 1.82,
+          "local_price": 1.82,
+          "currency": "EUR"
+        },
+        {
+          "date": "2026-06-22",
+          "eur_per_litre": 1.724,
+          "local_price": 1.724,
+          "currency": "EUR"
+        },
+        {
+          "date": "2026-06-29",
+          "eur_per_litre": 1.711,
+          "local_price": 1.711,
+          "currency": "EUR"
+        },
+        {
+          "date": "2026-07-06",
+          "eur_per_litre": 1.73,
+          "local_price": 1.73,
+          "currency": "EUR"
+        },
+        {
+          "date": "2026-07-13",
+          "eur_per_litre": 1.84,
+          "local_price": 1.84,
+          "currency": "EUR"
+        },
+        {
+          "date": "2026-07-20",
+          "eur_per_litre": 1.931,
+          "local_price": 1.931,
+          "currency": "EUR"
+        },
+        {
+          "date": "2026-07-27",
+          "eur_per_litre": 2.051,
+          "local_price": 2.051,
+          "currency": "EUR"
+        },
+        {
+          "date": "2026-08-03",
+          "eur_per_litre": 2.05,
+          "local_price": 2.05,
+          "currency": "EUR"
+        },
+        {
+          "date": "2026-08-10",
+          "eur_per_litre": 1.965,
+          "local_price": 1.965,
+          "currency": "EUR"
+        },
+        {
+          "date": "2026-08-17",
+          "eur_per_litre": 2.043,
+          "local_price": 2.043,
+          "currency": "EUR"
+        },
+        {
+          "date": "2026-08-24",
+          "eur_per_litre": 2.05,
+          "local_price": 2.05,
+          "currency": "EUR"
+        },
+        {
+          "date": "2026-08-31",
+          "eur_per_litre": 1.993,
+          "local_price": 1.993,
+          "currency": "EUR"
+        },
+        {
+          "date": "2026-09-07",
+          "eur_per_litre": 2.126,
+          "local_price": 2.126,
+          "currency": "EUR"
+        },
+        {
+          "date": "2026-09-14",
+          "eur_per_litre": 2.197,
+          "local_price": 2.197,
+          "currency": "EUR"
+        },
+        {
+          "date": "2026-09-21",
+          "eur_per_litre": 2.238,
+          "local_price": 2.238,
+          "currency": "EUR"
+        },
+        {
+          "date": "2026-09-28",
+          "eur_per_litre": 2.259,
+          "local_price": 2.259,
+          "currency": "EUR"
+        },
+        {
+          "date": "2026-10-05",
+          "eur_per_litre": 2.138,
+          "local_price": 2.138,
+          "currency": "EUR"
+        },
+        {
+          "date": "2026-10-12",
+          "eur_per_litre": 2.162,
+          "local_price": 2.162,
+          "currency": "EUR"
+        },
+        {
+          "date": "2026-10-19",
+          "eur_per_litre": 2.132,
+          "local_price": 2.132,
+          "currency": "EUR"
+        },
+        {
+          "date": "2026-10-26",
+          "eur_per_litre": 2.132,
+          "local_price": 2.132,
+          "currency": "EUR"
+        }
+      ]
     },
     "DE": {
-      "source_label": "Очікує оновлення"
+      "eur_per_litre": 2.298,
+      "local_price": 2.298,
+      "currency": "EUR",
+      "data_date": "2026-10-26",
+      "source_label": "Єврокомісія · Weekly Oil Bulletin (fuel-prices.eu)",
+      "source_url": "https://energy.ec.europa.eu/data-and-analysis/weekly-oil-bulletin_en",
+      "history": [
+        {
+          "date": "2025-10-27",
+          "eur_per_litre": 1.594,
+          "local_price": 1.594,
+          "currency": "EUR"
+        },
+        {
+          "date": "2025-11-03",
+          "eur_per_litre": 1.606,
+          "local_price": 1.606,
+          "currency": "EUR"
+        },
+        {
+          "date": "2025-11-10",
+          "eur_per_litre": 1.636,
+          "local_price": 1.636,
+          "currency": "EUR"
+        },
+        {
+          "date": "2025-11-17",
+          "eur_per_litre": 1.638,
+          "local_price": 1.638,
+          "currency": "EUR"
+        },
+        {
+          "date": "2025-11-24",
+          "eur_per_litre": 1.657,
+          "local_price": 1.657,
+          "currency": "EUR"
+        },
+        {
+          "date": "2025-12-01",
+          "eur_per_litre": 1.633,
+          "local_price": 1.633,
+          "currency": "EUR"
+        },
+        {
+          "date": "2025-12-08",
+          "eur_per_litre": 1.612,
+          "local_price": 1.612,
+          "currency": "EUR"
+        },
+        {
+          "date": "2025-12-15",
+          "eur_per_litre": 1.59,
+          "local_price": 1.59,
+          "currency": "EUR"
+        },
+        {
+          "date": "2025-12-22",
+          "eur_per_litre": 1.58,
+          "local_price": 1.58,
+          "currency": "EUR"
+        },
+        {
+          "date": "2025-12-29",
+          "eur_per_litre": 1.593,
+          "local_price": 1.593,
+          "currency": "EUR"
+        },
+        {
+          "date": "2026-01-05",
+          "eur_per_litre": 1.675,
+          "local_price": 1.675,
+          "currency": "EUR"
+        },
+        {
+          "date": "2026-01-12",
+          "eur_per_litre": 1.682,
+          "local_price": 1.682,
+          "currency": "EUR"
+        },
+        {
+          "date": "2026-01-19",
+          "eur_per_litre": 1.694,
+          "local_price": 1.694,
+          "currency": "EUR"
+        },
+        {
+          "date": "2026-01-26",
+          "eur_per_litre": 1.696,
+          "local_price": 1.696,
+          "currency": "EUR"
+        },
+        {
+          "date": "2026-02-02",
+          "eur_per_litre": 1.722,
+          "local_price": 1.722,
+          "currency": "EUR"
+        },
+        {
+          "date": "2026-02-09",
+          "eur_per_litre": 1.714,
+          "local_price": 1.714,
+          "currency": "EUR"
+        },
+        {
+          "date": "2026-02-16",
+          "eur_per_litre": 1.711,
+          "local_price": 1.711,
+          "currency": "EUR"
+        },
+        {
+          "date": "2026-02-23",
+          "eur_per_litre": 1.733,
+          "local_price": 1.733,
+          "currency": "EUR"
+        },
+        {
+          "date": "2026-03-02",
+          "eur_per_litre": 1.812,
+          "local_price": 1.812,
+          "currency": "EUR"
+        },
+        {
+          "date": "2026-03-09",
+          "eur_per_litre": 2.163,
+          "local_price": 2.163,
+          "currency": "EUR"
+        },
+        {
+          "date": "2026-03-16",
+          "eur_per_litre": 2.146,
+          "local_price": 2.146,
+          "currency": "EUR"
+        },
+        {
+          "date": "2026-03-23",
+          "eur_per_litre": 2.297,
+          "local_price": 2.297,
+          "currency": "EUR"
+        },
+        {
+          "date": "2026-03-30",
+          "eur_per_litre": 2.286,
+          "local_price": 2.286,
+          "currency": "EUR"
+        },
+        {
+          "date": "2026-04-06",
+          "eur_per_litre": 2.434,
+          "local_price": 2.434,
+          "currency": "EUR"
+        },
+        {
+          "date": "2026-04-13",
+          "eur_per_litre": 2.275,
+          "local_price": 2.275,
+          "currency": "EUR"
+        },
+        {
+          "date": "2026-04-20",
+          "eur_per_litre": 2.133,
+          "local_price": 2.133,
+          "currency": "EUR"
+        },
+        {
+          "date": "2026-04-27",
+          "eur_per_litre": 2.181,
+          "local_price": 2.181,
+          "currency": "EUR"
+        },
+        {
+          "date": "2026-05-04",
+          "eur_per_litre": 2.088,
+          "local_price": 2.088,
+          "currency": "EUR"
+        },
+        {
+          "date": "2026-05-11",
+          "eur_per_litre": 1.97,
+          "local_price": 1.97,
+          "currency": "EUR"
+        },
+        {
+          "date": "2026-05-18",
+          "eur_per_litre": 1.972,
+          "local_price": 1.972,
+          "currency": "EUR"
+        },
+        {
+          "date": "2026-05-25",
+          "eur_per_litre": 1.936,
+          "local_price": 1.936,
+          "currency": "EUR"
+        },
+        {
+          "date": "2026-06-01",
+          "eur_per_litre": 1.86,
+          "local_price": 1.86,
+          "currency": "EUR"
+        },
+        {
+          "date": "2026-06-08",
+          "eur_per_litre": 1.87,
+          "local_price": 1.87,
+          "currency": "EUR"
+        },
+        {
+          "date": "2026-06-15",
+          "eur_per_litre": 1.795,
+          "local_price": 1.795,
+          "currency": "EUR"
+        },
+        {
+          "date": "2026-06-22",
+          "eur_per_litre": 1.729,
+          "local_price": 1.729,
+          "currency": "EUR"
+        },
+        {
+          "date": "2026-06-29",
+          "eur_per_litre": 1.763,
+          "local_price": 1.763,
+          "currency": "EUR"
+        },
+        {
+          "date": "2026-07-06",
+          "eur_per_litre": 1.928,
+          "local_price": 1.928,
+          "currency": "EUR"
+        },
+        {
+          "date": "2026-07-13",
+          "eur_per_litre": 2.015,
+          "local_price": 2.015,
+          "currency": "EUR"
+        },
+        {
+          "date": "2026-07-20",
+          "eur_per_litre": 2.158,
+          "local_price": 2.158,
+          "currency": "EUR"
+        },
+        {
+          "date": "2026-07-27",
+          "eur_per_litre": 2.186,
+          "local_price": 2.186,
+          "currency": "EUR"
+        },
+        {
+          "date": "2026-08-03",
+          "eur_per_litre": 2.208,
+          "local_price": 2.208,
+          "currency": "EUR"
+        },
+        {
+          "date": "2026-08-10",
+          "eur_per_litre": 2.149,
+          "local_price": 2.149,
+          "currency": "EUR"
+        },
+        {
+          "date": "2026-08-17",
+          "eur_per_litre": 2.266,
+          "local_price": 2.266,
+          "currency": "EUR"
+        },
+        {
+          "date": "2026-08-24",
+          "eur_per_litre": 2.286,
+          "local_price": 2.286,
+          "currency": "EUR"
+        },
+        {
+          "date": "2026-08-31",
+          "eur_per_litre": 2.232,
+          "local_price": 2.232,
+          "currency": "EUR"
+        },
+        {
+          "date": "2026-09-07",
+          "eur_per_litre": 2.328,
+          "local_price": 2.328,
+          "currency": "EUR"
+        },
+        {
+          "date": "2026-09-14",
+          "eur_per_litre": 2.426,
+          "local_price": 2.426,
+          "currency": "EUR"
+        },
+        {
+          "date": "2026-09-21",
+          "eur_per_litre": 2.457,
+          "local_price": 2.457,
+          "currency": "EUR"
+        },
+        {
+          "date": "2026-09-28",
+          "eur_per_litre": 2.437,
+          "local_price": 2.437,
+          "currency": "EUR"
+        },
+        {
+          "date": "2026-10-05",
+          "eur_per_litre": 2.254,
+          "local_price": 2.254,
+          "currency": "EUR"
+        },
+        {
+          "date": "2026-10-12",
+          "eur_per_litre": 2.27,
+          "local_price": 2.27,
+          "currency": "EUR"
+        },
+        {
+          "date": "2026-10-19",
+          "eur_per_litre": 2.266,
+          "local_price": 2.266,
+          "currency": "EUR"
+        },
+        {
+          "date": "2026-10-26",
+          "eur_per_litre": 2.298,
+          "local_price": 2.298,
+          "currency": "EUR"
+        }
+      ]
     },
     "PL": {
-      "source_label": "Очікує оновлення"
+      "eur_per_litre": 1.781,
+      "local_price": 7.844,
+      "currency": "PLN",
+      "data_date": "2026-10-26",
+      "source_label": "Єврокомісія · Weekly Oil Bulletin (fuel-prices.eu)",
+      "source_url": "https://energy.ec.europa.eu/data-and-analysis/weekly-oil-bulletin_en",
+      "history": [
+        {
+          "date": "2025-10-27",
+          "eur_per_litre": 1.418,
+          "local_price": 6.005,
+          "currency": "PLN"
+        },
+        {
+          "date": "2025-11-03",
+          "eur_per_litre": 1.421,
+          "local_price": 6.047,
+          "currency": "PLN"
+        },
+        {
+          "date": "2025-11-10",
+          "eur_per_litre": 1.428,
+          "local_price": 6.047,
+          "currency": "PLN"
+        },
+        {
+          "date": "2025-11-17",
+          "eur_per_litre": 1.46,
+          "local_price": 6.165,
+          "currency": "PLN"
+        },
+        {
+          "date": "2025-11-24",
+          "eur_per_litre": 1.489,
+          "local_price": 6.297,
+          "currency": "PLN"
+        },
+        {
+          "date": "2025-12-01",
+          "eur_per_litre": 1.48,
+          "local_price": 6.259,
+          "currency": "PLN"
+        },
+        {
+          "date": "2025-12-08",
+          "eur_per_litre": 1.466,
+          "local_price": 6.203,
+          "currency": "PLN"
+        },
+        {
+          "date": "2025-12-15",
+          "eur_per_litre": 1.453,
+          "local_price": 6.135,
+          "currency": "PLN"
+        },
+        {
+          "date": "2025-12-22",
+          "eur_per_litre": 1.436,
+          "local_price": 6.052,
+          "currency": "PLN"
+        },
+        {
+          "date": "2025-12-29",
+          "eur_per_litre": 1.425,
+          "local_price": 6.029,
+          "currency": "PLN"
+        },
+        {
+          "date": "2026-01-05",
+          "eur_per_litre": 1.418,
+          "local_price": 5.98,
+          "currency": "PLN"
+        },
+        {
+          "date": "2026-01-12",
+          "eur_per_litre": 1.417,
+          "local_price": 5.964,
+          "currency": "PLN"
+        },
+        {
+          "date": "2026-01-19",
+          "eur_per_litre": 1.403,
+          "local_price": 5.93,
+          "currency": "PLN"
+        },
+        {
+          "date": "2026-01-26",
+          "eur_per_litre": 1.4,
+          "local_price": 5.891,
+          "currency": "PLN"
+        },
+        {
+          "date": "2026-02-02",
+          "eur_per_litre": 1.399,
+          "local_price": 5.9,
+          "currency": "PLN"
+        },
+        {
+          "date": "2026-02-09",
+          "eur_per_litre": 1.404,
+          "local_price": 5.912,
+          "currency": "PLN"
+        },
+        {
+          "date": "2026-02-16",
+          "eur_per_litre": 1.411,
+          "local_price": 5.94,
+          "currency": "PLN"
+        },
+        {
+          "date": "2026-02-23",
+          "eur_per_litre": 1.424,
+          "local_price": 6.004,
+          "currency": "PLN"
+        },
+        {
+          "date": "2026-03-02",
+          "eur_per_litre": 1.426,
+          "local_price": 6.054,
+          "currency": "PLN"
+        },
+        {
+          "date": "2026-03-09",
+          "eur_per_litre": 1.731,
+          "local_price": 7.406,
+          "currency": "PLN"
+        },
+        {
+          "date": "2026-03-16",
+          "eur_per_litre": 1.782,
+          "local_price": 7.607,
+          "currency": "PLN"
+        },
+        {
+          "date": "2026-03-23",
+          "eur_per_litre": 1.992,
+          "local_price": 8.495,
+          "currency": "PLN"
+        },
+        {
+          "date": "2026-03-30",
+          "eur_per_litre": 2.017,
+          "local_price": 8.651,
+          "currency": "PLN"
+        },
+        {
+          "date": "2026-04-06",
+          "eur_per_litre": 1.803,
+          "local_price": 7.726,
+          "currency": "PLN"
+        },
+        {
+          "date": "2026-04-13",
+          "eur_per_litre": 1.769,
+          "local_price": 7.527,
+          "currency": "PLN"
+        },
+        {
+          "date": "2026-04-20",
+          "eur_per_litre": 1.636,
+          "local_price": 6.924,
+          "currency": "PLN"
+        },
+        {
+          "date": "2026-04-27",
+          "eur_per_litre": 1.62,
+          "local_price": 6.876,
+          "currency": "PLN"
+        },
+        {
+          "date": "2026-05-04",
+          "eur_per_litre": 1.684,
+          "local_price": 7.167,
+          "currency": "PLN"
+        },
+        {
+          "date": "2026-05-11",
+          "eur_per_litre": 1.623,
+          "local_price": 6.883,
+          "currency": "PLN"
+        },
+        {
+          "date": "2026-05-18",
+          "eur_per_litre": 1.576,
+          "local_price": 6.691,
+          "currency": "PLN"
+        },
+        {
+          "date": "2026-05-25",
+          "eur_per_litre": 1.586,
+          "local_price": 6.715,
+          "currency": "PLN"
+        },
+        {
+          "date": "2026-06-01",
+          "eur_per_litre": 1.467,
+          "local_price": 6.209,
+          "currency": "PLN"
+        },
+        {
+          "date": "2026-06-08",
+          "eur_per_litre": 1.492,
+          "local_price": 6.331,
+          "currency": "PLN"
+        },
+        {
+          "date": "2026-06-15",
+          "eur_per_litre": 1.473,
+          "local_price": 6.255,
+          "currency": "PLN"
+        },
+        {
+          "date": "2026-06-22",
+          "eur_per_litre": 1.404,
+          "local_price": 5.992,
+          "currency": "PLN"
+        },
+        {
+          "date": "2026-06-29",
+          "eur_per_litre": 1.408,
+          "local_price": 6.035,
+          "currency": "PLN"
+        },
+        {
+          "date": "2026-07-06",
+          "eur_per_litre": 1.602,
+          "local_price": 6.868,
+          "currency": "PLN"
+        },
+        {
+          "date": "2026-07-13",
+          "eur_per_litre": 1.612,
+          "local_price": 6.971,
+          "currency": "PLN"
+        },
+        {
+          "date": "2026-07-20",
+          "eur_per_litre": 1.725,
+          "local_price": 7.472,
+          "currency": "PLN"
+        },
+        {
+          "date": "2026-07-27",
+          "eur_per_litre": 1.818,
+          "local_price": 7.856,
+          "currency": "PLN"
+        },
+        {
+          "date": "2026-08-03",
+          "eur_per_litre": 1.879,
+          "local_price": 8.085,
+          "currency": "PLN"
+        },
+        {
+          "date": "2026-08-10",
+          "eur_per_litre": 1.864,
+          "local_price": 8.013,
+          "currency": "PLN"
+        },
+        {
+          "date": "2026-08-17",
+          "eur_per_litre": 1.686,
+          "local_price": 7.258,
+          "currency": "PLN"
+        },
+        {
+          "date": "2026-08-24",
+          "eur_per_litre": 1.728,
+          "local_price": 7.445,
+          "currency": "PLN"
+        },
+        {
+          "date": "2026-08-31",
+          "eur_per_litre": 1.669,
+          "local_price": 7.225,
+          "currency": "PLN"
+        },
+        {
+          "date": "2026-09-07",
+          "eur_per_litre": 1.982,
+          "local_price": 8.543,
+          "currency": "PLN"
+        },
+        {
+          "date": "2026-09-14",
+          "eur_per_litre": 2.005,
+          "local_price": 8.706,
+          "currency": "PLN"
+        },
+        {
+          "date": "2026-09-21",
+          "eur_per_litre": 2.039,
+          "local_price": 8.876,
+          "currency": "PLN"
+        },
+        {
+          "date": "2026-09-28",
+          "eur_per_litre": 2.06,
+          "local_price": 9.01,
+          "currency": "PLN"
+        },
+        {
+          "date": "2026-10-05",
+          "eur_per_litre": 1.764,
+          "local_price": 7.727,
+          "currency": "PLN"
+        },
+        {
+          "date": "2026-10-12",
+          "eur_per_litre": 1.795,
+          "local_price": 7.87,
+          "currency": "PLN"
+        },
+        {
+          "date": "2026-10-19",
+          "eur_per_litre": 1.79,
+          "local_price": 7.827,
+          "currency": "PLN"
+        },
+        {
+          "date": "2026-10-26",
+          "eur_per_litre": 1.781,
+          "local_price": 7.844,
+          "currency": "PLN"
+        }
+      ]
     },
     "LT": {
-      "source_label": "Очікує оновлення"
+      "eur_per_litre": 2.222,
+      "local_price": 2.222,
+      "currency": "EUR",
+      "data_date": "2026-10-26",
+      "source_label": "Єврокомісія · Weekly Oil Bulletin (fuel-prices.eu)",
+      "source_url": "https://energy.ec.europa.eu/data-and-analysis/weekly-oil-bulletin_en",
+      "history": [
+        {
+          "date": "2025-10-27",
+          "eur_per_litre": 1.463,
+          "local_price": 1.463,
+          "currency": "EUR"
+        },
+        {
+          "date": "2025-11-03",
+          "eur_per_litre": 1.487,
+          "local_price": 1.487,
+          "currency": "EUR"
+        },
+        {
+          "date": "2025-11-10",
+          "eur_per_litre": 1.505,
+          "local_price": 1.505,
+          "currency": "EUR"
+        },
+        {
+          "date": "2025-11-17",
+          "eur_per_litre": 1.525,
+          "local_price": 1.525,
+          "currency": "EUR"
+        },
+        {
+          "date": "2025-11-24",
+          "eur_per_litre": 1.578,
+          "local_price": 1.578,
+          "currency": "EUR"
+        },
+        {
+          "date": "2025-12-01",
+          "eur_per_litre": 1.572,
+          "local_price": 1.572,
+          "currency": "EUR"
+        },
+        {
+          "date": "2025-12-08",
+          "eur_per_litre": 1.554,
+          "local_price": 1.554,
+          "currency": "EUR"
+        },
+        {
+          "date": "2025-12-15",
+          "eur_per_litre": 1.515,
+          "local_price": 1.515,
+          "currency": "EUR"
+        },
+        {
+          "date": "2025-12-22",
+          "eur_per_litre": 1.497,
+          "local_price": 1.497,
+          "currency": "EUR"
+        },
+        {
+          "date": "2025-12-29",
+          "eur_per_litre": 1.519,
+          "local_price": 1.519,
+          "currency": "EUR"
+        },
+        {
+          "date": "2026-01-05",
+          "eur_per_litre": 1.531,
+          "local_price": 1.531,
+          "currency": "EUR"
+        },
+        {
+          "date": "2026-01-12",
+          "eur_per_litre": 1.537,
+          "local_price": 1.537,
+          "currency": "EUR"
+        },
+        {
+          "date": "2026-01-19",
+          "eur_per_litre": 1.553,
+          "local_price": 1.553,
+          "currency": "EUR"
+        },
+        {
+          "date": "2026-01-26",
+          "eur_per_litre": 1.584,
+          "local_price": 1.584,
+          "currency": "EUR"
+        },
+        {
+          "date": "2026-02-02",
+          "eur_per_litre": 1.597,
+          "local_price": 1.597,
+          "currency": "EUR"
+        },
+        {
+          "date": "2026-02-09",
+          "eur_per_litre": 1.612,
+          "local_price": 1.612,
+          "currency": "EUR"
+        },
+        {
+          "date": "2026-02-16",
+          "eur_per_litre": 1.597,
+          "local_price": 1.597,
+          "currency": "EUR"
+        },
+        {
+          "date": "2026-02-23",
+          "eur_per_litre": 1.615,
+          "local_price": 1.615,
+          "currency": "EUR"
+        },
+        {
+          "date": "2026-03-02",
+          "eur_per_litre": 1.641,
+          "local_price": 1.641,
+          "currency": "EUR"
+        },
+        {
+          "date": "2026-03-09",
+          "eur_per_litre": 1.901,
+          "local_price": 1.901,
+          "currency": "EUR"
+        },
+        {
+          "date": "2026-03-16",
+          "eur_per_litre": 1.952,
+          "local_price": 1.952,
+          "currency": "EUR"
+        },
+        {
+          "date": "2026-03-23",
+          "eur_per_litre": 2.101,
+          "local_price": 2.101,
+          "currency": "EUR"
+        },
+        {
+          "date": "2026-03-30",
+          "eur_per_litre": 2.125,
+          "local_price": 2.125,
+          "currency": "EUR"
+        },
+        {
+          "date": "2026-04-06",
+          "eur_per_litre": 2.178,
+          "local_price": 2.178,
+          "currency": "EUR"
+        },
+        {
+          "date": "2026-04-13",
+          "eur_per_litre": 2.15,
+          "local_price": 2.15,
+          "currency": "EUR"
+        },
+        {
+          "date": "2026-04-20",
+          "eur_per_litre": 2.041,
+          "local_price": 2.041,
+          "currency": "EUR"
+        },
+        {
+          "date": "2026-04-27",
+          "eur_per_litre": 1.99,
+          "local_price": 1.99,
+          "currency": "EUR"
+        },
+        {
+          "date": "2026-05-04",
+          "eur_per_litre": 2.001,
+          "local_price": 2.001,
+          "currency": "EUR"
+        },
+        {
+          "date": "2026-05-11",
+          "eur_per_litre": 1.962,
+          "local_price": 1.962,
+          "currency": "EUR"
+        },
+        {
+          "date": "2026-05-18",
+          "eur_per_litre": 1.932,
+          "local_price": 1.932,
+          "currency": "EUR"
+        },
+        {
+          "date": "2026-05-25",
+          "eur_per_litre": 1.926,
+          "local_price": 1.926,
+          "currency": "EUR"
+        },
+        {
+          "date": "2026-06-01",
+          "eur_per_litre": 1.876,
+          "local_price": 1.876,
+          "currency": "EUR"
+        },
+        {
+          "date": "2026-06-08",
+          "eur_per_litre": 1.849,
+          "local_price": 1.849,
+          "currency": "EUR"
+        },
+        {
+          "date": "2026-06-15",
+          "eur_per_litre": 1.801,
+          "local_price": 1.801,
+          "currency": "EUR"
+        },
+        {
+          "date": "2026-06-22",
+          "eur_per_litre": 1.765,
+          "local_price": 1.765,
+          "currency": "EUR"
+        },
+        {
+          "date": "2026-06-29",
+          "eur_per_litre": 1.739,
+          "local_price": 1.739,
+          "currency": "EUR"
+        },
+        {
+          "date": "2026-07-06",
+          "eur_per_litre": 1.735,
+          "local_price": 1.735,
+          "currency": "EUR"
+        },
+        {
+          "date": "2026-07-13",
+          "eur_per_litre": 1.803,
+          "local_price": 1.803,
+          "currency": "EUR"
+        },
+        {
+          "date": "2026-07-20",
+          "eur_per_litre": 1.927,
+          "local_price": 1.927,
+          "currency": "EUR"
+        },
+        {
+          "date": "2026-07-27",
+          "eur_per_litre": 1.995,
+          "local_price": 1.995,
+          "currency": "EUR"
+        },
+        {
+          "date": "2026-08-03",
+          "eur_per_litre": 2.035,
+          "local_price": 2.035,
+          "currency": "EUR"
+        },
+        {
+          "date": "2026-08-10",
+          "eur_per_litre": 1.996,
+          "local_price": 1.996,
+          "currency": "EUR"
+        },
+        {
+          "date": "2026-08-17",
+          "eur_per_litre": 2.031,
+          "local_price": 2.031,
+          "currency": "EUR"
+        },
+        {
+          "date": "2026-08-24",
+          "eur_per_litre": 2.052,
+          "local_price": 2.052,
+          "currency": "EUR"
+        },
+        {
+          "date": "2026-08-31",
+          "eur_per_litre": 2.043,
+          "local_price": 2.043,
+          "currency": "EUR"
+        },
+        {
+          "date": "2026-09-07",
+          "eur_per_litre": 2.128,
+          "local_price": 2.128,
+          "currency": "EUR"
+        },
+        {
+          "date": "2026-09-14",
+          "eur_per_litre": 2.184,
+          "local_price": 2.184,
+          "currency": "EUR"
+        },
+        {
+          "date": "2026-09-21",
+          "eur_per_litre": 2.258,
+          "local_price": 2.258,
+          "currency": "EUR"
+        },
+        {
+          "date": "2026-09-28",
+          "eur_per_litre": 2.253,
+          "local_price": 2.253,
+          "currency": "EUR"
+        },
+        {
+          "date": "2026-10-05",
+          "eur_per_litre": 2.241,
+          "local_price": 2.241,
+          "currency": "EUR"
+        },
+        {
+          "date": "2026-10-12",
+          "eur_per_litre": 2.205,
+          "local_price": 2.205,
+          "currency": "EUR"
+        },
+        {
+          "date": "2026-10-19",
+          "eur_per_litre": 2.219,
+          "local_price": 2.219,
+          "currency": "EUR"
+        },
+        {
+          "date": "2026-10-26",
+          "eur_per_litre": 2.222,
+          "local_price": 2.222,
+          "currency": "EUR"
+        }
+      ]
     },
     "LV": {
-      "source_label": "Очікує оновлення"
+      "eur_per_litre": 2.084,
+      "local_price": 2.084,
+      "currency": "EUR",
+      "data_date": "2026-10-26",
+      "source_label": "Єврокомісія · Weekly Oil Bulletin (fuel-prices.eu)",
+      "source_url": "https://energy.ec.europa.eu/data-and-analysis/weekly-oil-bulletin_en",
+      "history": [
+        {
+          "date": "2025-10-27",
+          "eur_per_litre": 1.515,
+          "local_price": 1.515,
+          "currency": "EUR"
+        },
+        {
+          "date": "2025-11-03",
+          "eur_per_litre": 1.524,
+          "local_price": 1.524,
+          "currency": "EUR"
+        },
+        {
+          "date": "2025-11-10",
+          "eur_per_litre": 1.522,
+          "local_price": 1.522,
+          "currency": "EUR"
+        },
+        {
+          "date": "2025-11-17",
+          "eur_per_litre": 1.522,
+          "local_price": 1.522,
+          "currency": "EUR"
+        },
+        {
+          "date": "2025-11-24",
+          "eur_per_litre": 1.561,
+          "local_price": 1.561,
+          "currency": "EUR"
+        },
+        {
+          "date": "2025-12-01",
+          "eur_per_litre": 1.548,
+          "local_price": 1.548,
+          "currency": "EUR"
+        },
+        {
+          "date": "2025-12-08",
+          "eur_per_litre": 1.524,
+          "local_price": 1.524,
+          "currency": "EUR"
+        },
+        {
+          "date": "2025-12-15",
+          "eur_per_litre": 1.501,
+          "local_price": 1.501,
+          "currency": "EUR"
+        },
+        {
+          "date": "2025-12-22",
+          "eur_per_litre": 1.479,
+          "local_price": 1.479,
+          "currency": "EUR"
+        },
+        {
+          "date": "2025-12-29",
+          "eur_per_litre": 1.477,
+          "local_price": 1.477,
+          "currency": "EUR"
+        },
+        {
+          "date": "2026-01-05",
+          "eur_per_litre": 1.49,
+          "local_price": 1.49,
+          "currency": "EUR"
+        },
+        {
+          "date": "2026-01-12",
+          "eur_per_litre": 1.482,
+          "local_price": 1.482,
+          "currency": "EUR"
+        },
+        {
+          "date": "2026-01-19",
+          "eur_per_litre": 1.481,
+          "local_price": 1.481,
+          "currency": "EUR"
+        },
+        {
+          "date": "2026-01-26",
+          "eur_per_litre": 1.494,
+          "local_price": 1.494,
+          "currency": "EUR"
+        },
+        {
+          "date": "2026-02-02",
+          "eur_per_litre": 1.508,
+          "local_price": 1.508,
+          "currency": "EUR"
+        },
+        {
+          "date": "2026-02-09",
+          "eur_per_litre": 1.52,
+          "local_price": 1.52,
+          "currency": "EUR"
+        },
+        {
+          "date": "2026-02-16",
+          "eur_per_litre": 1.523,
+          "local_price": 1.523,
+          "currency": "EUR"
+        },
+        {
+          "date": "2026-02-23",
+          "eur_per_litre": 1.528,
+          "local_price": 1.528,
+          "currency": "EUR"
+        },
+        {
+          "date": "2026-03-02",
+          "eur_per_litre": 1.548,
+          "local_price": 1.548,
+          "currency": "EUR"
+        },
+        {
+          "date": "2026-03-09",
+          "eur_per_litre": 1.793,
+          "local_price": 1.793,
+          "currency": "EUR"
+        },
+        {
+          "date": "2026-03-16",
+          "eur_per_litre": 1.919,
+          "local_price": 1.919,
+          "currency": "EUR"
+        },
+        {
+          "date": "2026-03-23",
+          "eur_per_litre": 2.023,
+          "local_price": 2.023,
+          "currency": "EUR"
+        },
+        {
+          "date": "2026-03-30",
+          "eur_per_litre": 2.048,
+          "local_price": 2.048,
+          "currency": "EUR"
+        },
+        {
+          "date": "2026-04-06",
+          "eur_per_litre": 2.056,
+          "local_price": 2.056,
+          "currency": "EUR"
+        },
+        {
+          "date": "2026-04-13",
+          "eur_per_litre": 2.124,
+          "local_price": 2.124,
+          "currency": "EUR"
+        },
+        {
+          "date": "2026-04-20",
+          "eur_per_litre": 2.006,
+          "local_price": 2.006,
+          "currency": "EUR"
+        },
+        {
+          "date": "2026-04-27",
+          "eur_per_litre": 1.921,
+          "local_price": 1.921,
+          "currency": "EUR"
+        },
+        {
+          "date": "2026-05-04",
+          "eur_per_litre": 1.921,
+          "local_price": 1.921,
+          "currency": "EUR"
+        },
+        {
+          "date": "2026-05-11",
+          "eur_per_litre": 1.96,
+          "local_price": 1.96,
+          "currency": "EUR"
+        },
+        {
+          "date": "2026-05-18",
+          "eur_per_litre": 1.902,
+          "local_price": 1.902,
+          "currency": "EUR"
+        },
+        {
+          "date": "2026-05-25",
+          "eur_per_litre": 1.892,
+          "local_price": 1.892,
+          "currency": "EUR"
+        },
+        {
+          "date": "2026-06-01",
+          "eur_per_litre": 1.824,
+          "local_price": 1.824,
+          "currency": "EUR"
+        },
+        {
+          "date": "2026-06-08",
+          "eur_per_litre": 1.789,
+          "local_price": 1.789,
+          "currency": "EUR"
+        },
+        {
+          "date": "2026-06-15",
+          "eur_per_litre": 1.786,
+          "local_price": 1.786,
+          "currency": "EUR"
+        },
+        {
+          "date": "2026-06-22",
+          "eur_per_litre": 1.786,
+          "local_price": 1.786,
+          "currency": "EUR"
+        },
+        {
+          "date": "2026-06-29",
+          "eur_per_litre": 1.674,
+          "local_price": 1.674,
+          "currency": "EUR"
+        },
+        {
+          "date": "2026-07-06",
+          "eur_per_litre": 1.639,
+          "local_price": 1.639,
+          "currency": "EUR"
+        },
+        {
+          "date": "2026-07-13",
+          "eur_per_litre": 1.705,
+          "local_price": 1.705,
+          "currency": "EUR"
+        },
+        {
+          "date": "2026-07-20",
+          "eur_per_litre": 1.798,
+          "local_price": 1.798,
+          "currency": "EUR"
+        },
+        {
+          "date": "2026-07-27",
+          "eur_per_litre": 1.936,
+          "local_price": 1.936,
+          "currency": "EUR"
+        },
+        {
+          "date": "2026-08-03",
+          "eur_per_litre": 1.94,
+          "local_price": 1.94,
+          "currency": "EUR"
+        },
+        {
+          "date": "2026-08-10",
+          "eur_per_litre": 1.898,
+          "local_price": 1.898,
+          "currency": "EUR"
+        },
+        {
+          "date": "2026-08-17",
+          "eur_per_litre": 1.914,
+          "local_price": 1.914,
+          "currency": "EUR"
+        },
+        {
+          "date": "2026-08-24",
+          "eur_per_litre": 1.972,
+          "local_price": 1.972,
+          "currency": "EUR"
+        },
+        {
+          "date": "2026-08-31",
+          "eur_per_litre": 1.952,
+          "local_price": 1.952,
+          "currency": "EUR"
+        },
+        {
+          "date": "2026-09-07",
+          "eur_per_litre": 2.048,
+          "local_price": 2.048,
+          "currency": "EUR"
+        },
+        {
+          "date": "2026-09-14",
+          "eur_per_litre": 2.096,
+          "local_price": 2.096,
+          "currency": "EUR"
+        },
+        {
+          "date": "2026-09-21",
+          "eur_per_litre": 2.169,
+          "local_price": 2.169,
+          "currency": "EUR"
+        },
+        {
+          "date": "2026-09-28",
+          "eur_per_litre": 2.133,
+          "local_price": 2.133,
+          "currency": "EUR"
+        },
+        {
+          "date": "2026-10-05",
+          "eur_per_litre": 2.12,
+          "local_price": 2.12,
+          "currency": "EUR"
+        },
+        {
+          "date": "2026-10-12",
+          "eur_per_litre": 2.072,
+          "local_price": 2.072,
+          "currency": "EUR"
+        },
+        {
+          "date": "2026-10-19",
+          "eur_per_litre": 2.063,
+          "local_price": 2.063,
+          "currency": "EUR"
+        },
+        {
+          "date": "2026-10-26",
+          "eur_per_litre": 2.084,
+          "local_price": 2.084,
+          "currency": "EUR"
+        }
+      ]
+    }
+  },
+  "data_sources": {
+    "eu": {
+      "name": "European Commission Weekly Oil Bulletin (dataset mirror checked against EC history)",
+      "url": "https://energy.ec.europa.eu/data-and-analysis/weekly-oil-bulletin_en",
+      "dataset_url": "https://www.fuel-prices.eu/research/",
+      "licence": "CC BY 4.0",
+      "frequency": "weekly",
+      "latest_week": "2026-10-26"
+    },
+    "ua": {
+      "name": "АЗС24, national diesel retail average; EUR conversion by National Bank of Ukraine",
+      "url": "https://azs24.com.ua/dp/",
+      "licence": "CC BY 4.0 for AZS24 calculated data",
+      "frequency": "daily source snapshot, generally business days"
     }
   }
 }
