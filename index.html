@@ -170,13 +170,19 @@ function renderComparison(){
 
 let routeMapInstance=null,routeLine=null,routeGeoPromise=null;
 const monitoredIso={UKR:"UA",SVK:"SK",CZE:"CZ",AUT:"AT",DEU:"DE",POL:"PL",LTU:"LT",LVA:"LV"};
+let leafletPromise=null;
 function ensureLeaflet(){
- if(window.L)return Promise.resolve();
- return new Promise((resolve,reject)=>{
+ if(window.L)return Promise.resolve(window.L);
+ if(leafletPromise)return leafletPromise;
+ leafletPromise=new Promise((resolve,reject)=>{
   const existing=document.querySelector('script[data-leaflet="1"]');
-  if(existing){existing.addEventListener("load",resolve,{once:true});existing.addEventListener("error",reject,{once:true});return;}
-  const script=document.createElement("script");script.src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js";script.dataset.leaflet="1";script.onload=resolve;script.onerror=reject;document.head.appendChild(script);
+  const script=existing||document.createElement("script");
+  const cleanup=()=>{if(!window.L)leafletPromise=null;};
+  script.addEventListener("load",()=>{if(window.L)resolve(window.L);else{cleanup();reject(new Error("Leaflet завантажився некоректно."));}},{once:true});
+  script.addEventListener("error",()=>{cleanup();reject(new Error("Не вдалося завантажити Leaflet."));},{once:true});
+  if(!existing){script.src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js";script.dataset.leaflet="1";document.head.appendChild(script);}
  });
+ return leafletPromise;
 }
 function initRouteCalculator(){
  document.getElementById("buildRouteButton").addEventListener("click",buildAutomaticRoute);
@@ -303,14 +309,14 @@ function renderRouteCosts(segments,totalRouteKm){
  const coverage=totalRouteKm>0?knownKm/totalRouteKm*100:0;
  document.getElementById("routeBreakdown").textContent="Вартість порахована для "+formatNumber(coverage,0)+"% маршруту, де є ціни в моніторингу ("+formatNumber(knownKm,1)+" з "+formatNumber(totalRouteKm,1)+" км). Для решти країн показано кілометраж і витрату пального без вартості. Середня витрата: "+formatNumber(consumption,1)+" л/100 км; резерв: "+formatNumber(buffer,1)+"%. Розрахунок не враховує фактичний запас у баку, залишок пального, заправки на конкретних АЗС, AdBlue та дорожні збори.";
 }
+let fuelMapInstance=null;
 async function initFuelMap(){
  const container=document.getElementById("fuelPriceMap");
  try{
-  if(!window.L){
-   await new Promise((resolve,reject)=>{const s=document.createElement("script");s.src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js";s.onload=resolve;s.onerror=reject;document.head.appendChild(s)});
-  }
-  const map=L.map("fuelPriceMap",{scrollWheelZoom:false}).setView([51.2,17.5],4);
-  L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",{maxZoom:9,attribution:'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'}).addTo(map);
+  await ensureLeaflet();
+  if(fuelMapInstance)return;
+  fuelMapInstance=L.map("fuelPriceMap",{scrollWheelZoom:false}).setView([51.2,17.5],4);
+  L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",{maxZoom:9,attribution:'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'}).addTo(fuelMapInstance);
   const geo=await fetch("https://raw.githubusercontent.com/datasets/geo-countries/master/data/countries.geojson");
   if(!geo.ok)throw Error("Не вдалося завантажити географічні межі");
   const gj=await geo.json(),rows=currentCountryRows().filter(x=>Number.isFinite(x.eur_per_litre));
@@ -322,9 +328,9 @@ async function initFuelMap(){
   },onEachFeature:(feature,layer)=>{
    const row=rows.find(x=>isoByCode[x.code]===feature.properties.ISO_A3||isoByCode[x.code]===feature.properties.ADM0_A3);
    if(row)layer.bindPopup("<strong>"+row.flag+" "+row.name+"</strong><br>"+row.eur_per_litre.toFixed(3)+" €/л<br>Дані: "+(row.data_date||"—")+"<br><span style='color:#9aabc0'>"+(row.source_label||"")+"</span>");
-  }}).addTo(map);
-  if(featureLayer.getBounds().isValid())map.fitBounds(featureLayer.getBounds().pad(.22));
-  setTimeout(()=>map.invalidateSize(),150);
+  }}).addTo(fuelMapInstance);
+  if(featureLayer.getBounds().isValid())fuelMapInstance.fitBounds(featureLayer.getBounds(),{padding:[18,18],maxZoom:5});
+  setTimeout(()=>fuelMapInstance.invalidateSize(),150);
  }catch(err){container.innerHTML='<div class="chart-empty">Карту не вдалося завантажити. Перевірте підключення до зовнішніх картографічних сервісів. Дані та калькулятори продовжують працювати.</div>';}
 }
 
