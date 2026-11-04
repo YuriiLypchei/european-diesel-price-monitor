@@ -1,13 +1,13 @@
 {
-  "generated_at": "2026-11-03T06:17:38+00:00",
+  "generated_at": "2026-11-04T06:22:14+00:00",
   "countries": {
     "UA": {
-      "eur_per_litre": 2.0467,
-      "local_price": 104.49,
+      "eur_per_litre": 2.0477,
+      "local_price": 104.55,
       "currency": "UAH",
-      "data_date": "2026-11-03",
-      "fx_rate": 51.0527,
-      "fx_rate_date": "2026-11-03",
+      "data_date": "2026-11-04",
+      "fx_rate": 51.0582,
+      "fx_rate_date": "2026-11-04",
       "source_label": "АЗС24 · середня по Україні",
       "source_url": "https://azs24.com.ua/dp/",
       "history": [
@@ -39,6 +39,12 @@
           "date": "2026-11-03",
           "local_price": 104.49,
           "eur_per_litre": 2.0467,
+          "currency": "UAH"
+        },
+        {
+          "date": "2026-11-04",
+          "local_price": 104.55,
+          "eur_per_litre": 2.0477,
           "currency": "UAH"
         }
       ]
