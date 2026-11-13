@@ -1,13 +1,13 @@
 {
-  "generated_at": "2026-11-12T06:25:31+00:00",
+  "generated_at": "2026-11-13T06:22:57+00:00",
   "countries": {
     "UA": {
-      "eur_per_litre": 2.0657,
-      "local_price": 104.28,
+      "eur_per_litre": 2.0581,
+      "local_price": 103.6,
       "currency": "UAH",
-      "data_date": "2026-11-12",
-      "fx_rate": 50.4823,
-      "fx_rate_date": "2026-11-12",
+      "data_date": "2026-11-13",
+      "fx_rate": 50.3379,
+      "fx_rate_date": "2026-11-13",
       "source_label": "АЗС24 · середня по Україні",
       "source_url": "https://azs24.com.ua/dp/",
       "history": [
@@ -94,14 +94,20 @@
           "local_price": 104.28,
           "eur_per_litre": 2.0657,
           "currency": "UAH"
+        },
+        {
+          "date": "2026-11-13",
+          "local_price": 103.6,
+          "eur_per_litre": 2.0581,
+          "currency": "UAH"
         }
       ]
     },
     "SK": {
-      "eur_per_litre": 1.979,
-      "local_price": 1.979,
+      "eur_per_litre": 1.965,
+      "local_price": 1.965,
       "currency": "EUR",
-      "data_date": "2026-11-02",
+      "data_date": "2026-11-09",
       "source_label": "Єврокомісія · Weekly Oil Bulletin (fuel-prices.eu)",
       "source_url": "https://energy.ec.europa.eu/data-and-analysis/weekly-oil-bulletin_en",
       "history": [
@@ -416,14 +422,20 @@
           "eur_per_litre": 1.979,
           "local_price": 1.979,
           "currency": "EUR"
+        },
+        {
+          "date": "2026-11-09",
+          "eur_per_litre": 1.965,
+          "local_price": 1.965,
+          "currency": "EUR"
         }
       ]
     },
     "CZ": {
-      "eur_per_litre": 1.981,
-      "local_price": 48.248,
+      "eur_per_litre": 1.899,
+      "local_price": 46.262,
       "currency": "CZK",
-      "data_date": "2026-11-02",
+      "data_date": "2026-11-09",
       "source_label": "Єврокомісія · Weekly Oil Bulletin (fuel-prices.eu)",
       "source_url": "https://energy.ec.europa.eu/data-and-analysis/weekly-oil-bulletin_en",
       "history": [
@@ -738,14 +750,20 @@
           "eur_per_litre": 1.981,
           "local_price": 48.248,
           "currency": "CZK"
+        },
+        {
+          "date": "2026-11-09",
+          "eur_per_litre": 1.899,
+          "local_price": 46.262,
+          "currency": "CZK"
         }
       ]
     },
     "AT": {
-      "eur_per_litre": 2.148,
-      "local_price": 2.148,
+      "eur_per_litre": 2.087,
+      "local_price": 2.087,
       "currency": "EUR",
-      "data_date": "2026-11-02",
+      "data_date": "2026-11-09",
       "source_label": "Єврокомісія · Weekly Oil Bulletin (fuel-prices.eu)",
       "source_url": "https://energy.ec.europa.eu/data-and-analysis/weekly-oil-bulletin_en",
       "history": [
@@ -1060,14 +1078,20 @@
           "eur_per_litre": 2.148,
           "local_price": 2.148,
           "currency": "EUR"
+        },
+        {
+          "date": "2026-11-09",
+          "eur_per_litre": 2.087,
+          "local_price": 2.087,
+          "currency": "EUR"
         }
       ]
     },
     "DE": {
-      "eur_per_litre": 2.282,
-      "local_price": 2.282,
+      "eur_per_litre": 2.253,
+      "local_price": 2.253,
       "currency": "EUR",
-      "data_date": "2026-11-02",
+      "data_date": "2026-11-09",
       "source_label": "Єврокомісія · Weekly Oil Bulletin (fuel-prices.eu)",
       "source_url": "https://energy.ec.europa.eu/data-and-analysis/weekly-oil-bulletin_en",
       "history": [
@@ -1382,14 +1406,20 @@
           "eur_per_litre": 2.282,
           "local_price": 2.282,
           "currency": "EUR"
+        },
+        {
+          "date": "2026-11-09",
+          "eur_per_litre": 2.253,
+          "local_price": 2.253,
+          "currency": "EUR"
         }
       ]
     },
     "PL": {
-      "eur_per_litre": 1.812,
-      "local_price": 8.006,
+      "eur_per_litre": 1.753,
+      "local_price": 7.686,
       "currency": "PLN",
-      "data_date": "2026-11-02",
+      "data_date": "2026-11-09",
       "source_label": "Єврокомісія · Weekly Oil Bulletin (fuel-prices.eu)",
       "source_url": "https://energy.ec.europa.eu/data-and-analysis/weekly-oil-bulletin_en",
       "history": [
@@ -1704,14 +1734,20 @@
           "eur_per_litre": 1.812,
           "local_price": 8.006,
           "currency": "PLN"
+        },
+        {
+          "date": "2026-11-09",
+          "eur_per_litre": 1.753,
+          "local_price": 7.686,
+          "currency": "PLN"
         }
       ]
     },
     "LT": {
-      "eur_per_litre": 2.223,
-      "local_price": 2.223,
+      "eur_per_litre": 2.225,
+      "local_price": 2.225,
       "currency": "EUR",
-      "data_date": "2026-11-02",
+      "data_date": "2026-11-09",
       "source_label": "Єврокомісія · Weekly Oil Bulletin (fuel-prices.eu)",
       "source_url": "https://energy.ec.europa.eu/data-and-analysis/weekly-oil-bulletin_en",
       "history": [
@@ -2026,14 +2062,20 @@
           "eur_per_litre": 2.223,
           "local_price": 2.223,
           "currency": "EUR"
+        },
+        {
+          "date": "2026-11-09",
+          "eur_per_litre": 2.225,
+          "local_price": 2.225,
+          "currency": "EUR"
         }
       ]
     },
     "LV": {
-      "eur_per_litre": 2.099,
-      "local_price": 2.099,
+      "eur_per_litre": 2.083,
+      "local_price": 2.083,
       "currency": "EUR",
-      "data_date": "2026-11-02",
+      "data_date": "2026-11-09",
       "source_label": "Єврокомісія · Weekly Oil Bulletin (fuel-prices.eu)",
       "source_url": "https://energy.ec.europa.eu/data-and-analysis/weekly-oil-bulletin_en",
       "history": [
@@ -2348,6 +2390,12 @@
           "eur_per_litre": 2.099,
           "local_price": 2.099,
           "currency": "EUR"
+        },
+        {
+          "date": "2026-11-09",
+          "eur_per_litre": 2.083,
+          "local_price": 2.083,
+          "currency": "EUR"
         }
       ]
     }
@@ -2359,7 +2407,7 @@
       "dataset_url": "https://www.fuel-prices.eu/research/",
       "licence": "CC BY 4.0",
       "frequency": "weekly",
-      "latest_week": "2026-11-02"
+      "latest_week": "2026-11-09"
     },
     "ua": {
       "name": "АЗС24, national diesel retail average; EUR conversion by National Bank of Ukraine",
