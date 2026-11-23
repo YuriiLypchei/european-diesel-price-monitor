@@ -1,13 +1,13 @@
 {
-  "generated_at": "2026-11-22T06:20:08+00:00",
+  "generated_at": "2026-11-23T06:33:21+00:00",
   "countries": {
     "UA": {
-      "eur_per_litre": 2.0213,
+      "eur_per_litre": 2.0318,
       "local_price": 100.12,
       "currency": "UAH",
-      "data_date": "2026-11-22",
-      "fx_rate": 49.5335,
-      "fx_rate_date": "2026-11-22",
+      "data_date": "2026-11-23",
+      "fx_rate": 49.2763,
+      "fx_rate_date": "2026-11-23",
       "source_label": "АЗС24 · середня по Україні",
       "source_url": "https://azs24.com.ua/dp/",
       "history": [
@@ -154,6 +154,12 @@
           "local_price": 100.12,
           "eur_per_litre": 2.0213,
           "currency": "UAH"
+        },
+        {
+          "date": "2026-11-23",
+          "local_price": 100.12,
+          "eur_per_litre": 2.0318,
+          "currency": "UAH"
         }
       ]
     },
@@ -165,12 +171,6 @@
       "source_label": "Єврокомісія · Weekly Oil Bulletin (fuel-prices.eu)",
       "source_url": "https://energy.ec.europa.eu/data-and-analysis/weekly-oil-bulletin_en",
       "history": [
-        {
-          "date": "2025-11-17",
-          "eur_per_litre": 1.514,
-          "local_price": 1.514,
-          "currency": "EUR"
-        },
         {
           "date": "2025-11-24",
           "eur_per_litre": 1.517,
@@ -494,12 +494,6 @@
       "source_url": "https://energy.ec.europa.eu/data-and-analysis/weekly-oil-bulletin_en",
       "history": [
         {
-          "date": "2025-11-17",
-          "eur_per_litre": 1.417,
-          "local_price": 34.258,
-          "currency": "CZK"
-        },
-        {
           "date": "2025-11-24",
           "eur_per_litre": 1.438,
           "local_price": 34.751,
@@ -821,12 +815,6 @@
       "source_label": "Єврокомісія · Weekly Oil Bulletin (fuel-prices.eu)",
       "source_url": "https://energy.ec.europa.eu/data-and-analysis/weekly-oil-bulletin_en",
       "history": [
-        {
-          "date": "2025-11-17",
-          "eur_per_litre": 1.575,
-          "local_price": 1.575,
-          "currency": "EUR"
-        },
         {
           "date": "2025-11-24",
           "eur_per_litre": 1.595,
@@ -1150,12 +1138,6 @@
       "source_url": "https://energy.ec.europa.eu/data-and-analysis/weekly-oil-bulletin_en",
       "history": [
         {
-          "date": "2025-11-17",
-          "eur_per_litre": 1.638,
-          "local_price": 1.638,
-          "currency": "EUR"
-        },
-        {
           "date": "2025-11-24",
           "eur_per_litre": 1.657,
           "local_price": 1.657,
@@ -1477,12 +1459,6 @@
       "source_label": "Єврокомісія · Weekly Oil Bulletin (fuel-prices.eu)",
       "source_url": "https://energy.ec.europa.eu/data-and-analysis/weekly-oil-bulletin_en",
       "history": [
-        {
-          "date": "2025-11-17",
-          "eur_per_litre": 1.46,
-          "local_price": 6.165,
-          "currency": "PLN"
-        },
         {
           "date": "2025-11-24",
           "eur_per_litre": 1.489,
@@ -1806,12 +1782,6 @@
       "source_url": "https://energy.ec.europa.eu/data-and-analysis/weekly-oil-bulletin_en",
       "history": [
         {
-          "date": "2025-11-17",
-          "eur_per_litre": 1.525,
-          "local_price": 1.525,
-          "currency": "EUR"
-        },
-        {
           "date": "2025-11-24",
           "eur_per_litre": 1.578,
           "local_price": 1.578,
@@ -2133,12 +2103,6 @@
       "source_label": "Єврокомісія · Weekly Oil Bulletin (fuel-prices.eu)",
       "source_url": "https://energy.ec.europa.eu/data-and-analysis/weekly-oil-bulletin_en",
       "history": [
-        {
-          "date": "2025-11-17",
-          "eur_per_litre": 1.522,
-          "local_price": 1.522,
-          "currency": "EUR"
-        },
         {
           "date": "2025-11-24",
           "eur_per_litre": 1.561,
